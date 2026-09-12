@@ -39,6 +39,7 @@ export const HERO_SLIDES: HeroSlide[] = [
 export interface HeroOverlayProps {
   onOpenBooking?: () => void;
   onExploreServices?: () => void;
+  isRevealed?: boolean;
 }
 
 export interface HeroOverlayHandle {
@@ -46,7 +47,7 @@ export interface HeroOverlayHandle {
 }
 
 const HeroOverlay = forwardRef<HeroOverlayHandle, HeroOverlayProps>(function HeroOverlay(
-  { onOpenBooking, onExploreServices },
+  { onOpenBooking, onExploreServices, isRevealed = true },
   ref
 ) {
   const [activeChapter, setActiveChapter] = useState(0);
@@ -137,7 +138,18 @@ const HeroOverlay = forwardRef<HeroOverlayHandle, HeroOverlayProps>(function Her
                 style={{ width: '100%' }}
               >
                 {/* Top Brand Tag with BlurText */}
-                <div
+                <motion.div
+                  initial={{ opacity: 0, y: 16, filter: 'blur(6px)' }}
+                  animate={
+                    isRevealed
+                      ? { opacity: 1, y: 0, filter: 'blur(0px)' }
+                      : { opacity: 0, y: 16, filter: 'blur(6px)' }
+                  }
+                  transition={{
+                    duration: 0.75,
+                    delay: 0.1,
+                    ease: [0.16, 1, 0.3, 1],
+                  }}
                   style={{
                     display: 'inline-flex',
                     alignItems: 'center',
@@ -157,8 +169,9 @@ const HeroOverlay = forwardRef<HeroOverlayHandle, HeroOverlayProps>(function Her
                     text={currentSlide.eyebrow}
                     threshold={0.01}
                     delay={25}
+                    ready={isRevealed}
                   />
-                </div>
+                </motion.div>
 
                 {/* Monumental Headline with signature word-by-word BlurText effect */}
                 <BlurText
@@ -168,6 +181,7 @@ const HeroOverlay = forwardRef<HeroOverlayHandle, HeroOverlayProps>(function Her
                   delay={85}
                   direction="top"
                   threshold={0.01}
+                  ready={isRevealed}
                   style={{
                     fontFamily: 'var(--font-serif-display)',
                     fontSize: 'clamp(2.6rem, 5.8vw, 4.8rem)',
@@ -187,6 +201,7 @@ const HeroOverlay = forwardRef<HeroOverlayHandle, HeroOverlayProps>(function Her
                   threshold={0.01}
                   delay={18}
                   text={currentSlide.subtitle}
+                  ready={isRevealed}
                   style={{
                     fontFamily: 'var(--font-sans-display)',
                     fontSize: 'clamp(0.92rem, 1.3vw, 1.12rem)',
@@ -202,7 +217,20 @@ const HeroOverlay = forwardRef<HeroOverlayHandle, HeroOverlayProps>(function Her
           </div>
 
           {/* Action CTAs (Persistent, Anchored & Always Interactive) */}
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', alignItems: 'center' }}>
+          <motion.div
+            initial={{ opacity: 0, y: 24, filter: 'blur(4px)' }}
+            animate={
+              isRevealed
+                ? { opacity: 1, y: 0, filter: 'blur(0px)' }
+                : { opacity: 0, y: 24, filter: 'blur(4px)' }
+            }
+            transition={{
+              duration: 0.85,
+              delay: 0.55,
+              ease: [0.16, 1, 0.3, 1],
+            }}
+            style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', alignItems: 'center' }}
+          >
             <button
               onClick={onOpenBooking}
               className="btn-primary-crimson squircle-sm"
@@ -231,51 +259,60 @@ const HeroOverlay = forwardRef<HeroOverlayHandle, HeroOverlayProps>(function Her
             >
               <span>EXPLORE SERVICES</span>
             </button>
-          </div>
+          </motion.div>
         </div>
 
         {/* Scroll Indicator */}
-        <div
-          ref={scrollIndicatorRef}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={isRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+          transition={{ duration: 0.9, delay: 0.75, ease: [0.16, 1, 0.3, 1] }}
           style={{
             position: 'absolute',
             right: 0,
             bottom: '4px',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '12px',
-            fontFamily: 'var(--font-sans-display)',
-            fontSize: '0.74rem',
-            letterSpacing: '0.22em',
-            color: 'var(--gold-light)',
-            textTransform: 'uppercase',
             pointerEvents: 'none',
-            transition: 'opacity 0.15s linear',
           }}
         >
-          <span>SCROLL TO EXPLORE</span>
           <div
+            ref={scrollIndicatorRef}
             style={{
-              width: '18px',
-              height: '30px',
-              borderRadius: '12px',
-              border: '1.5px solid var(--gold-primary)',
               display: 'flex',
-              justifyContent: 'center',
-              paddingTop: '6px',
+              alignItems: 'center',
+              gap: '12px',
+              fontFamily: 'var(--font-sans-display)',
+              fontSize: '0.74rem',
+              letterSpacing: '0.22em',
+              color: 'var(--gold-light)',
+              textTransform: 'uppercase',
+              pointerEvents: 'auto',
+              transition: 'opacity 0.15s linear',
             }}
           >
+            <span>SCROLL TO EXPLORE</span>
             <div
               style={{
-                width: '3px',
-                height: '6px',
-                backgroundColor: 'var(--gold-primary)',
-                borderRadius: '2px',
-                animation: 'bounce 1.6s infinite ease-in-out',
+                width: '18px',
+                height: '30px',
+                borderRadius: '12px',
+                border: '1.5px solid var(--gold-primary)',
+                display: 'flex',
+                justifyContent: 'center',
+                paddingTop: '6px',
               }}
-            />
+            >
+              <div
+                style={{
+                  width: '3px',
+                  height: '6px',
+                  backgroundColor: 'var(--gold-primary)',
+                  borderRadius: '2px',
+                  animation: 'bounce 1.6s infinite ease-in-out',
+                }}
+              />
+            </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

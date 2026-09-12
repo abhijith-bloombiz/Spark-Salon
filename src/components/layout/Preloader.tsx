@@ -5,9 +5,10 @@ import { sparkAudio } from '@/lib/audio';
 
 interface PreloaderProps {
   onComplete: () => void;
+  onExitStart?: () => void;
 }
 
-export default function Preloader({ onComplete }: PreloaderProps) {
+export default function Preloader({ onComplete, onExitStart }: PreloaderProps) {
   const [progress, setProgress] = useState(0);
   const [stage, setStage] = useState<'loading' | 'done'>('loading');
   const [videoLoaded, setVideoLoaded] = useState(false);
@@ -29,11 +30,12 @@ export default function Preloader({ onComplete }: PreloaderProps) {
 
     timerRef.current = setTimeout(() => {
       setStage('done');
+      onExitStart?.();
       exitTimerRef.current = setTimeout(() => {
         onComplete();
       }, 700);
     }, 450);
-  }, [onComplete]);
+  }, [onComplete, onExitStart]);
 
   useEffect(() => {
     return () => {
@@ -103,7 +105,7 @@ export default function Preloader({ onComplete }: PreloaderProps) {
       style={{
         position: 'fixed',
         inset: 0,
-        zIndex: 999999,
+        zIndex: 999990,
         backgroundColor: '#040406',
         display: 'flex',
         flexDirection: 'column',

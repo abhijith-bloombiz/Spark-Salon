@@ -17,12 +17,14 @@ export interface SparkSalonHeroProps {
   onOpenBooking?: () => void;
   onExploreServices?: () => void;
   onComplete?: () => void;
+  isRevealed?: boolean;
 }
 
 export default function SparkSalonHero({
   onOpenBooking,
   onExploreServices,
   onComplete,
+  isRevealed = true,
 }: SparkSalonHeroProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const canvasRef = useRef<HeroCanvasHandle | null>(null);
@@ -152,17 +154,29 @@ export default function SparkSalonHero({
       }}
     >
       {/* 1. Canvas 2D frame sequence renderer */}
-      <HeroCanvas
-        ref={canvasRef}
-        loader={loaderRef.current}
-        config={HERO_FRAME_SET}
-      />
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          opacity: isRevealed ? 1 : 0.5,
+          transform: isRevealed ? 'scale(1)' : 'scale(1.03)',
+          transition: 'opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.4s cubic-bezier(0.16, 1, 0.3, 1)',
+          pointerEvents: 'none',
+        }}
+      >
+        <HeroCanvas
+          ref={canvasRef}
+          loader={loaderRef.current}
+          config={HERO_FRAME_SET}
+        />
+      </div>
 
       {/* 2. Interactive text, brand mark, headline, focusable CTAs */}
       <HeroOverlay
         ref={overlayRef}
         onOpenBooking={onOpenBooking}
         onExploreServices={onExploreServices}
+        isRevealed={isRevealed}
       />
 
       {/* 3. Accessible <noscript> fallback with static poster and core content */}

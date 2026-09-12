@@ -10,10 +10,12 @@ export default function CustomCursor() {
   const [isHovered, setIsHovered] = useState<boolean>(false);
   const [isClicking, setIsClicking] = useState<boolean>(false);
   const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [isTextInput, setIsTextInput] = useState<boolean>(false);
 
   const isHoveredRef = useRef(false);
   const isClickingRef = useRef(false);
   const cursorTextRef = useRef('');
+  const isTextInputRef = useRef(false);
 
   useEffect(() => {
     isHoveredRef.current = isHovered;
@@ -26,6 +28,10 @@ export default function CustomCursor() {
   useEffect(() => {
     cursorTextRef.current = cursorText;
   }, [cursorText]);
+
+  useEffect(() => {
+    isTextInputRef.current = isTextInput;
+  }, [isTextInput]);
 
   useEffect(() => {
     // Disable completely on touch / mobile devices
@@ -48,6 +54,8 @@ export default function CustomCursor() {
       if (ringRef.current) {
         const scale = isClickingRef.current
           ? 0.86
+          : isTextInputRef.current
+          ? 0.72
           : isHoveredRef.current
           ? cursorTextRef.current
             ? 1.55
@@ -113,8 +121,14 @@ export default function CustomCursor() {
       const target = e.target as HTMLElement | null;
       if (!target) return;
 
+      const textInput = Boolean(target.closest('input, textarea, select, [contenteditable="true"]'));
+      if (isTextInputRef.current !== textInput) {
+        setIsTextInput(textInput);
+        isTextInputRef.current = textInput;
+      }
+
       const interactive = target.closest(
-        'button, a, input, textarea, select, [role="button"], [role="menuitem"], .spark-tour-btn, .btn-primary-crimson, .btn-secondary-gold, .btn-ghost-luxury, .fill-btn, .editorial-cta-btn, .spark-booking-btn, .spark-search-btn, .spark-menu-btn, .btn-nav-control, .why-spark-card, .glass-panel-interactive'
+        'button, a, input, textarea, select, [role="button"], [role="menuitem"], [role="dialog"], .spark-tour-btn, .btn-primary-crimson, .btn-secondary-gold, .btn-ghost-luxury, .fill-btn, .editorial-cta-btn, .spark-booking-btn, .spark-search-btn, .spark-menu-btn, .btn-nav-control, .why-spark-card, .glass-panel-interactive'
       );
 
       const customBadge = target.closest('[data-cursor]') as HTMLElement | null;
@@ -174,8 +188,8 @@ export default function CustomCursor() {
           backgroundColor: '#d4af37',
           borderRadius: '50%',
           pointerEvents: 'none',
-          zIndex: 999999,
-          opacity: isVisible ? (isHovered && cursorText ? 0 : 1) : 0,
+          zIndex: 2147483647,
+          opacity: isVisible ? (isTextInput ? 0 : isHovered && cursorText ? 0 : 1) : 0,
           boxShadow: '0 0 10px rgba(212, 175, 55, 0.8), 0 0 18px rgba(255, 235, 170, 0.6)',
           transition: 'width 0.22s ease, height 0.22s ease, opacity 0.22s ease',
           willChange: 'transform',
@@ -191,20 +205,26 @@ export default function CustomCursor() {
           position: 'fixed',
           top: 0,
           left: 0,
-          width: cursorText ? '68px' : isHovered ? '46px' : '34px',
-          height: cursorText ? '68px' : isHovered ? '46px' : '34px',
+          width: cursorText ? '68px' : isTextInput ? '24px' : isHovered ? '46px' : '34px',
+          height: cursorText ? '68px' : isTextInput ? '24px' : isHovered ? '46px' : '34px',
           borderRadius: '50%',
-          border: isHovered
+          border: isTextInput
+            ? '1.5px dashed rgba(212, 175, 55, 0.55)'
+            : isHovered
             ? '1.5px solid rgba(212, 175, 55, 0.85)'
             : '1px solid rgba(212, 175, 55, 0.45)',
-          backgroundColor: isHovered
+          backgroundColor: isTextInput
+            ? 'transparent'
+            : isHovered
             ? 'rgba(212, 175, 55, 0.12)'
             : 'rgba(212, 175, 55, 0.02)',
-          boxShadow: isHovered
+          boxShadow: isTextInput
+            ? 'none'
+            : isHovered
             ? '0 0 20px rgba(212, 175, 55, 0.4), inset 0 0 12px rgba(212, 175, 55, 0.2)'
             : '0 0 8px rgba(212, 175, 55, 0.12)',
           pointerEvents: 'none',
-          zIndex: 999998,
+          zIndex: 2147483646,
           opacity: isVisible ? 1 : 0,
           display: 'flex',
           alignItems: 'center',

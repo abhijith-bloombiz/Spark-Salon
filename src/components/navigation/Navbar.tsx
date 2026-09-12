@@ -9,12 +9,14 @@ import BookingButton from './BookingButton';
 import MenuButton from './MenuButton';
 import FullscreenMenu from './FullscreenMenu';
 import SearchModal from './SearchModal';
+import './Navbar.css';
 
 interface NavbarProps {
   onOpenBooking?: () => void;
+  isRevealed?: boolean;
 }
 
-export default function Navbar({ onOpenBooking }: NavbarProps) {
+export default function Navbar({ onOpenBooking, isRevealed = true }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -77,8 +79,11 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
           display: 'flex',
           justifyContent: 'center',
           padding: 0,
-          pointerEvents: 'none',
-          transition: 'top 0.38s cubic-bezier(0.16, 1, 0.3, 1)',
+          pointerEvents: isRevealed ? 'none' : 'none',
+          opacity: isRevealed ? 1 : 0,
+          transform: isRevealed ? 'translateY(0)' : 'translateY(-22px)',
+          transition:
+            'top 0.38s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.12s, transform 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.12s',
         }}
       >
         <GlassSurface
@@ -234,116 +239,6 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
         }}
       />
 
-      {/* Global CSS for Navbar responsiveness & animations */}
-      <style jsx global>{`
-        /* Clean Borderless GlassSurface styling */
-        .spark-floating-navbar {
-          border: none !important;
-          box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.24),
-                      inset 0 -1px 1px 0 rgba(0, 0, 0, 0.35),
-                      inset 0 0 20px 0 rgba(212, 175, 55, 0.04),
-                      0 20px 50px -10px rgba(0, 0, 0, 0.8),
-                      0 0 20px rgba(212, 175, 55, 0.06) !important;
-        }
-
-        .spark-floating-navbar.is-scrolled {
-          border: none !important;
-          box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.28),
-                      inset 0 -1px 1px 0 rgba(0, 0, 0, 0.45),
-                      inset 0 0 20px 0 rgba(212, 175, 55, 0.05),
-                      0 24px 60px -10px rgba(0, 0, 0, 0.9),
-                      0 0 25px rgba(212, 175, 55, 0.1) !important;
-        }
-
-        /* Remove hamburger menu from desktop */
-        @media (min-width: 1041px) {
-          .spark-menu-wrapper {
-            display: none !important;
-          }
-          .spark-floating-navbar .spark-floating-navbar-content {
-            padding-right: 22px !important;
-          }
-        }
-
-        @media (max-width: 1040px) {
-          .spark-desktop-nav-links {
-            display: none !important;
-          }
-        }
-
-        @media (max-width: 640px) {
-          .spark-search-wrapper,
-          .spark-nav-divider {
-            display: none !important;
-          }
-        }
-
-        .spark-nav-link {
-          background: transparent !important;
-          background-color: transparent !important;
-          backdrop-filter: none !important;
-          -webkit-backdrop-filter: none !important;
-          box-shadow: none !important;
-        }
-
-        .spark-nav-link:hover {
-          color: #c9a45c !important;
-          transform: translateY(-1px) !important;
-        }
-
-        .spark-nav-link:hover .spark-nav-underline {
-          transform: scaleX(1) !important;
-          opacity: 1 !important;
-          box-shadow: 0 0 8px #c9a45c, 0 0 16px rgba(201, 164, 92, 0.6) !important;
-        }
-
-        .spark-search-btn:hover {
-          border-color: #e5c158 !important;
-          color: #e5c158 !important;
-          transform: scale(1.05) !important;
-          box-shadow: 0 0 16px rgba(201, 164, 92, 0.45) !important;
-        }
-
-        .spark-search-btn:hover .spark-search-icon {
-          color: #e5c158 !important;
-          transform: scale(1.05);
-        }
-
-        .spark-menu-close-btn:hover {
-          border-color: #e5c158 !important;
-          color: #e5c158 !important;
-          transform: rotate(90deg) scale(1.05) !important;
-          box-shadow: 0 0 20px rgba(201, 164, 92, 0.5) !important;
-        }
-
-        .spark-fullscreen-item:hover {
-          background-color: rgba(201, 164, 92, 0.08) !important;
-          border-color: rgba(201, 164, 92, 0.55) !important;
-          transform: translateX(8px) !important;
-        }
-
-        .spark-fullscreen-item:hover h2 {
-          color: #e5c158 !important;
-          text-shadow: 0 0 16px rgba(201, 164, 92, 0.4) !important;
-        }
-
-        .spark-logo-panel:hover {
-          filter: brightness(1.06);
-        }
-
-        /* Reduced motion support */
-        @media (prefers-reduced-motion: reduce) {
-          .spark-floating-navbar,
-          .spark-nav-link,
-          .spark-booking-btn,
-          .spark-search-btn,
-          .spark-menu-btn,
-          .spark-fullscreen-item {
-            transition: none !important;
-            animation: none !important;
-          }
-        }
-      `}</style>
     </>
   );
 }

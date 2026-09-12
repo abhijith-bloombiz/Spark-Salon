@@ -101,8 +101,8 @@ export default function SmoothScrollProvider({ children }: SmoothScrollProviderP
   // Always render ReactLenis so children tree is never unmounted/remounted during hydration
   return (
     <ReactLenis root options={options} autoRaf={false}>
-      {mounted && !reducedMotion && <LenisGsapSync />}
       {children}
+      {mounted && !reducedMotion ? <LenisGsapSync /> : null}
     </ReactLenis>
   );
 }

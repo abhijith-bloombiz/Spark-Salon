@@ -20,12 +20,18 @@ let hasShownPreloader = false;
 
 export default function HomePage() {
   const [preloaderDone, setPreloaderDone] = useState(() => hasShownPreloader);
+  const [isRevealed, setIsRevealed] = useState(() => hasShownPreloader);
   const [bookingModalOpen, setBookingModalOpen] = useState(false);
   const [initialStudio, setInitialStudio] = useState('hair');
+
+  const handlePreloaderExitStart = () => {
+    setIsRevealed(true);
+  };
 
   const handlePreloaderComplete = () => {
     hasShownPreloader = true;
     setPreloaderDone(true);
+    setIsRevealed(true);
   };
 
   const handleOpenBooking = (studio = 'hair') => {
@@ -36,13 +42,19 @@ export default function HomePage() {
   return (
     <main style={{ position: 'relative', minHeight: '100vh', backgroundColor: '#040406' }}>
       {/* 01 — 3D CINEMATIC INTRO PRELOADER (matching loading.png) */}
-      {!preloaderDone && <Preloader onComplete={handlePreloaderComplete} />}
+      {!preloaderDone && (
+        <Preloader
+          onComplete={handlePreloaderComplete}
+          onExitStart={handlePreloaderExitStart}
+        />
+      )}
 
       {/* ULTRA LUXURY FLOATING NAVBAR MATCHING EXACT REFERENCE IMAGE */}
-      <Navbar onOpenBooking={() => handleOpenBooking('hair')} />
+      <Navbar onOpenBooking={() => handleOpenBooking('hair')} isRevealed={isRevealed} />
 
       {/* 02 — CINEMATIC SCROLL-DRIVEN FRAME-SEQUENCE HERO */}
       <SparkSalonHero
+        isRevealed={isRevealed}
         onOpenBooking={() => handleOpenBooking('hair')}
         onExploreServices={() => {
           const el = document.getElementById('services');
@@ -88,7 +100,7 @@ export default function HomePage() {
           style={{
             position: 'fixed',
             inset: 0,
-            zIndex: 999999,
+            zIndex: 999990,
             backgroundColor: 'rgba(2, 2, 4, 0.88)',
             backdropFilter: 'blur(20px)',
             display: 'flex',

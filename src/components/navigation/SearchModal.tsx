@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { Search, X, Sparkles, ArrowRight } from 'lucide-react';
 import { SALON_CATEGORIES } from '@/lib/data/services';
 
@@ -12,6 +13,11 @@ interface SearchModalProps {
 
 export default function SearchModal({ isOpen, onClose, onBookTreatment }: SearchModalProps) {
   const [query, setQuery] = useState('');
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // ESC key to close
   useEffect(() => {
@@ -32,7 +38,7 @@ export default function SearchModal({ isOpen, onClose, onBookTreatment }: Search
     };
   }, [isOpen, onClose]);
 
-  if (!isOpen) return null;
+  if (!isOpen || !mounted) return null;
 
   const allServices = SALON_CATEGORIES.flatMap((cat) =>
     cat.items.map((item) => ({ ...item, categoryTitle: cat.title, categoryId: cat.id }))
@@ -47,7 +53,7 @@ export default function SearchModal({ isOpen, onClose, onBookTreatment }: Search
       )
     : allServices.slice(0, 6);
 
-  return (
+  return createPortal(
     <div
       role="dialog"
       aria-modal="true"
@@ -56,7 +62,7 @@ export default function SearchModal({ isOpen, onClose, onBookTreatment }: Search
       style={{
         position: 'fixed',
         inset: 0,
-        zIndex: 999999,
+        zIndex: 999990,
         backgroundColor: 'rgba(4, 4, 6, 0.88)',
         backdropFilter: 'blur(24px)',
         WebkitBackdropFilter: 'blur(24px)',
@@ -110,11 +116,14 @@ export default function SearchModal({ isOpen, onClose, onBookTreatment }: Search
               fontFamily: 'var(--font-sans-display), sans-serif',
               fontSize: '1.05rem',
               letterSpacing: '0.04em',
+              cursor: 'text',
             }}
           />
           <button
+            type="button"
             onClick={onClose}
             aria-label="Close search"
+            role="button"
             style={{
               background: 'none',
               border: 'none',
@@ -148,6 +157,19 @@ export default function SearchModal({ isOpen, onClose, onBookTreatment }: Search
             filtered.map((item) => (
               <div
                 key={item.id}
+                role="button"
+                tabIndex={0}
+                onClick={() => {
+                  onClose();
+                  onBookTreatment(item.categoryId);
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    onClose();
+                    onBookTreatment(item.categoryId);
+                  }
+                }}
                 className="squircle"
                 style={{
                   display: 'flex',
@@ -158,6 +180,7 @@ export default function SearchModal({ isOpen, onClose, onBookTreatment }: Search
                   border: '1px solid rgba(201, 164, 92, 0.15)',
                   borderRadius: '16px',
                   transition: 'all 0.2s ease',
+                  cursor: 'pointer',
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.borderColor = '#c9a45c';
@@ -193,7 +216,9 @@ export default function SearchModal({ isOpen, onClose, onBookTreatment }: Search
                     {item.price}
                   </span>
                   <button
-                    onClick={() => {
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
                       onClose();
                       onBookTreatment(item.categoryId);
                     }}
@@ -205,6 +230,7 @@ export default function SearchModal({ isOpen, onClose, onBookTreatment }: Search
                       display: 'inline-flex',
                       alignItems: 'center',
                       gap: '6px',
+                      cursor: 'pointer',
                     }}
                   >
                     <span>Book</span>
@@ -216,6 +242,7 @@ export default function SearchModal({ isOpen, onClose, onBookTreatment }: Search
           )}
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

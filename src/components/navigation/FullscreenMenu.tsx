@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { X, ArrowRight, Phone, MapPin, Clock } from 'lucide-react';
 
 interface FullscreenMenuProps {
@@ -25,6 +26,12 @@ export default function FullscreenMenu({
   onSelectSection,
   onOpenBooking,
 }: FullscreenMenuProps) {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   // ESC key listener to close menu
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -44,9 +51,9 @@ export default function FullscreenMenu({
     };
   }, [isOpen, onClose]);
 
-  if (!isOpen) return null;
+  if (!isOpen || !mounted) return null;
 
-  return (
+  return createPortal(
     <div
       role="dialog"
       aria-modal="true"
@@ -55,7 +62,7 @@ export default function FullscreenMenu({
       style={{
         position: 'fixed',
         inset: 0,
-        zIndex: 999999,
+        zIndex: 999990,
         backgroundColor: '#060608',
         backgroundImage:
           'radial-gradient(circle at 10% 20%, rgba(201, 164, 92, 0.08) 0%, transparent 50%), radial-gradient(circle at 90% 80%, rgba(139, 36, 31, 0.08) 0%, transparent 60%)',
@@ -312,6 +319,7 @@ export default function FullscreenMenu({
           }
         }
       `}</style>
-    </div>
+    </div>,
+    document.body
   );
 }

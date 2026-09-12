@@ -771,18 +771,26 @@ h1, h2, h3, h4, h5, h6, p, span, a, button, input, textarea, select {
 
 /* Custom Luxury Cursor Base Rules */
 @media (pointer: fine) {
-  body, a, button, [role="button"] {
+  body, a, button, [role="button"], [role="dialog"] {
     cursor: none !important;
   }
   input, textarea, select {
-    cursor: auto !important;
+    cursor: text !important;
   }
 }
 
-.custom-cursor-dot,
-.custom-cursor-ring {
+.custom-cursor-dot {
+  position: fixed !important;
   pointer-events: none !important;
   user-select: none !important;
+  z-index: 2147483647 !important;
+}
+
+.custom-cursor-ring {
+  position: fixed !important;
+  pointer-events: none !important;
+  user-select: none !important;
+  z-index: 2147483646 !important;
 }
 
 @media (pointer: coarse) {

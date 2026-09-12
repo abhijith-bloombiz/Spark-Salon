@@ -18,6 +18,7 @@ export interface BlurTextProps {
   onAnimationComplete?: () => void;
   stepDuration?: number;
   once?: boolean;
+  ready?: boolean;
   // Polymorphic & style extensions
   as?: React.ElementType;
   style?: React.CSSProperties;
@@ -67,6 +68,7 @@ export const BlurText: React.FC<BlurTextProps> = ({
   onAnimationComplete,
   stepDuration = 0.42,
   once: onceProp,
+  ready = true,
   as: Component = 'p',
   style,
   spanClassName = '',
@@ -217,8 +219,10 @@ export const BlurText: React.FC<BlurTextProps> = ({
         const currentAnimIndex = animIndex++;
         const isHighlight = isHighlighted(segment, currentAnimIndex);
 
+        const shouldAnimate = ready && inView;
+
         // When in view, animate forward staggered. When out of view, gentle non-flashing exit to conserve GPU frames.
-        const spanTransition: any = inView
+        const spanTransition: any = shouldAnimate
           ? {
               duration: totalDuration,
               times,
@@ -247,7 +251,7 @@ export const BlurText: React.FC<BlurTextProps> = ({
             className={combinedSpanClass}
             key={index}
             initial={fromSnapshot}
-            animate={inView ? animateKeyframes : fromSnapshot}
+            animate={shouldAnimate ? animateKeyframes : fromSnapshot}
             transition={spanTransition}
             style={{
               willChange: 'transform, opacity',

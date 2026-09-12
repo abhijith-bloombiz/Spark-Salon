@@ -505,7 +505,7 @@ export default function VirtualTour() {
           style={{
             position: 'fixed',
             inset: 0,
-            zIndex: 999999,
+            zIndex: 999990,
             backgroundColor: 'rgba(0, 0, 0, 0.94)',
             backdropFilter: 'blur(20px)',
             display: 'flex',
