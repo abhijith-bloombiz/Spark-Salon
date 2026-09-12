@@ -18,25 +18,59 @@ interface NavbarProps {
 
 export default function Navbar({ onOpenBooking, isRevealed = true }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
+  const [navHidden, setNavHidden] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const navRef = useRef<HTMLElement>(null);
   const navRafRef = useRef<number | null>(null);
 
-  // Scroll listener for sticky contraction
+  // Scroll listener: hides navbar to top when scrolling, reverses back when scrolling pauses or scrolls up
   useEffect(() => {
+    let lastY = typeof window !== 'undefined' ? window.scrollY : 0;
     let lastScrolled = false;
+    let idleTimer: NodeJS.Timeout | null = null;
+
     const handleScroll = () => {
-      const isPast = window.scrollY > 30;
+      const currentY = window.scrollY;
+      const isPast = currentY > 30;
+
       if (isPast !== lastScrolled) {
         lastScrolled = isPast;
         setScrolled(isPast);
       }
+
+      // At top of page, always keep navbar in natural position
+      if (currentY <= 30) {
+        if (idleTimer) clearTimeout(idleTimer);
+        setNavHidden(false);
+        lastY = currentY;
+        return;
+      }
+
+      const delta = Math.abs(currentY - lastY);
+      lastY = currentY;
+
+      // When actively scrolling in ANY direction (including reverse/up):
+      // Hide the navbar by translating it to the top!
+      if (delta > 1.5) {
+        setNavHidden(true);
+      }
+
+      // When not scrolling (user stops moving):
+      // Reverse back smoothly down into view!
+      if (idleTimer) clearTimeout(idleTimer);
+      idleTimer = setTimeout(() => {
+        setNavHidden(false);
+      }, 650);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (idleTimer) clearTimeout(idleTimer);
+    };
   }, []);
 
   // Subtle mouse-following specular light via CSS variables (zero React re-renders)
@@ -67,6 +101,14 @@ export default function Navbar({ onOpenBooking, isRevealed = true }: NavbarProps
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const isEffectivelyHidden = !isRevealed || (navHidden && !menuOpen && !searchOpen);
+  const transformValue = !isRevealed
+    ? 'translateY(-22px)'
+    : isEffectivelyHidden
+    ? 'translateY(-140%)'
+    : 'translateY(0)';
+  const opacityValue = isEffectivelyHidden ? 0 : 1;
+
   return (
     <>
       <header
@@ -79,11 +121,11 @@ export default function Navbar({ onOpenBooking, isRevealed = true }: NavbarProps
           display: 'flex',
           justifyContent: 'center',
           padding: 0,
-          pointerEvents: isRevealed ? 'none' : 'none',
-          opacity: isRevealed ? 1 : 0,
-          transform: isRevealed ? 'translateY(0)' : 'translateY(-22px)',
+          pointerEvents: 'none',
+          opacity: opacityValue,
+          transform: transformValue,
           transition:
-            'top 0.38s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.12s, transform 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.12s',
+            'top 0.38s cubic-bezier(0.16, 1, 0.3, 1), transform 0.48s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease',
         }}
       >
         <GlassSurface
@@ -108,7 +150,7 @@ export default function Navbar({ onOpenBooking, isRevealed = true }: NavbarProps
           onMouseMove={handleMouseMove}
           className={`spark-floating-navbar ${scrolled ? 'is-scrolled' : ''}`}
           style={{
-            pointerEvents: 'auto',
+            pointerEvents: isEffectivelyHidden ? 'none' : 'auto',
             position: 'relative',
             border: 'none',
             outline: 'none',
