@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { ArrowRight, Scissors, Sparkles, Crown, Palette, Heart, Gem, CheckCircle2, Clock, ShieldCheck } from 'lucide-react';
 import { BlurText, ScrollCard, ModernTiltCard, SectionCornerAccent } from '@/components/ui';
 
@@ -10,6 +10,7 @@ interface ServicesExplorerProps {
 
 export default function ServicesExplorer({ onOpenBooking }: ServicesExplorerProps) {
   const [activeIdx, setActiveIdx] = useState(0);
+  const categoryRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
   const categories = [
     {
@@ -94,6 +95,18 @@ export default function ServicesExplorer({ onOpenBooking }: ServicesExplorerProp
 
   const current = categories[activeIdx];
 
+  const handleCategoryClick = (idx: number) => {
+    setActiveIdx(idx);
+    const btn = categoryRefs.current[idx];
+    if (btn) {
+      btn.scrollIntoView({
+        behavior: 'smooth',
+        inline: 'center',
+        block: 'nearest',
+      });
+    }
+  };
+
   const handleBookingClick = () => {
     if (onOpenBooking) {
       onOpenBooking(current.studio);
@@ -106,6 +119,7 @@ export default function ServicesExplorer({ onOpenBooking }: ServicesExplorerProp
   return (
     <section
       id="services"
+      className="services-section"
       style={{
         position: 'relative',
         minHeight: '850px',
@@ -184,93 +198,100 @@ export default function ServicesExplorer({ onOpenBooking }: ServicesExplorerProp
                 />
               </div>
 
-              <div className="services-categories-list" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                {categories.map((cat, idx) => {
-                  const isActive = activeIdx === idx;
-                  return (
-                    <button
-                      key={cat.num}
-                      onClick={() => setActiveIdx(idx)}
-                      className={`squircle-sm services-category-btn ${isActive ? 'is-active' : ''}`}
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'space-between',
-                        padding: '13px 18px',
-                        border: isActive
-                          ? '1px solid var(--gold-primary)'
-                          : '1px solid rgba(255, 255, 255, 0.08)',
-                        background: isActive
-                          ? 'linear-gradient(90deg, rgba(212, 175, 55, 0.25) 0%, rgba(212, 175, 55, 0.08) 100%)'
-                          : 'rgba(14, 13, 20, 0.94)',
-                        color: isActive ? 'var(--gold-light)' : 'var(--text-muted)',
-                        cursor: 'pointer',
-                        transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
-                        boxShadow: isActive ? '0 4px 20px rgba(212, 175, 55, 0.25)' : 'none',
-                        position: 'relative',
-                        overflow: 'hidden',
-                        outline: 'none',
-                      }}
-                      onMouseEnter={(e) => {
-                        if (!isActive) {
-                          e.currentTarget.style.borderColor = 'rgba(212, 175, 55, 0.4)';
-                          e.currentTarget.style.background = 'rgba(212, 175, 55, 0.08)';
-                          e.currentTarget.style.color = '#ffffff';
-                        }
-                      }}
-                      onMouseLeave={(e) => {
-                        if (!isActive) {
-                          e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.08)';
-                          e.currentTarget.style.background = 'rgba(12, 11, 18, 0.65)';
-                          e.currentTarget.style.color = 'var(--text-muted)';
-                        }
-                      }}
-                    >
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-                        <span
-                          style={{
-                            fontFamily: 'var(--font-sans-display)',
-                            fontSize: '0.78rem',
-                            fontWeight: 700,
-                            letterSpacing: '0.15em',
-                            color: isActive ? 'var(--gold-light)' : 'var(--gold-primary)',
-                          }}
-                        >
-                          {cat.num}
-                        </span>
-                        <span
-                          style={{
-                            fontFamily: 'var(--font-sans-display)',
-                            fontSize: '0.8rem',
-                            fontWeight: 800,
-                            letterSpacing: '0.18em',
-                            textTransform: 'uppercase',
-                            color: isActive ? '#ffffff' : 'inherit',
-                          }}
-                        >
-                          {cat.name}
-                        </span>
-                      </div>
-
-                      <ArrowRight
-                        size={14}
-                        color={isActive ? 'var(--gold-light)' : 'var(--text-dim)'}
-                        style={{
-                          transform: isActive ? 'translateX(4px)' : 'none',
-                          transition: 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+              <div className="services-categories-wrapper">
+                <div className="services-categories-list" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  {categories.map((cat, idx) => {
+                    const isActive = activeIdx === idx;
+                    return (
+                      <button
+                        key={cat.num}
+                        ref={(el) => {
+                          categoryRefs.current[idx] = el;
                         }}
-                      />
-                    </button>
-                  );
-                })}
+                        onClick={() => handleCategoryClick(idx)}
+                        className={`squircle-sm services-category-btn ${isActive ? 'is-active' : ''}`}
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'space-between',
+                          padding: '13px 18px',
+                          border: isActive
+                            ? '1px solid var(--gold-primary)'
+                            : '1px solid rgba(255, 255, 255, 0.08)',
+                          background: isActive
+                            ? 'linear-gradient(90deg, rgba(212, 175, 55, 0.25) 0%, rgba(212, 175, 55, 0.08) 100%)'
+                            : 'rgba(14, 13, 20, 0.94)',
+                          color: isActive ? 'var(--gold-light)' : 'var(--text-muted)',
+                          cursor: 'pointer',
+                          transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+                          boxShadow: isActive ? '0 4px 20px rgba(212, 175, 55, 0.25)' : 'none',
+                          position: 'relative',
+                          overflow: 'hidden',
+                          outline: 'none',
+                        }}
+                        onMouseEnter={(e) => {
+                          if (!isActive) {
+                            e.currentTarget.style.borderColor = 'rgba(212, 175, 55, 0.4)';
+                            e.currentTarget.style.background = 'rgba(212, 175, 55, 0.08)';
+                            e.currentTarget.style.color = '#ffffff';
+                          }
+                        }}
+                        onMouseLeave={(e) => {
+                          if (!isActive) {
+                            e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.08)';
+                            e.currentTarget.style.background = 'rgba(12, 11, 18, 0.65)';
+                            e.currentTarget.style.color = 'var(--text-muted)';
+                          }
+                        }}
+                      >
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                          <span
+                            style={{
+                              fontFamily: 'var(--font-sans-display)',
+                              fontSize: '0.78rem',
+                              fontWeight: 700,
+                              letterSpacing: '0.15em',
+                              color: isActive ? 'var(--gold-light)' : 'var(--gold-primary)',
+                            }}
+                          >
+                            {cat.num}
+                          </span>
+                          <span
+                            style={{
+                              fontFamily: 'var(--font-sans-display)',
+                              fontSize: '0.8rem',
+                              fontWeight: 800,
+                              letterSpacing: '0.18em',
+                              textTransform: 'uppercase',
+                              color: isActive ? '#ffffff' : 'inherit',
+                            }}
+                          >
+                            {cat.name}
+                          </span>
+                        </div>
+
+                        <ArrowRight
+                          className="services-cat-arrow"
+                          size={14}
+                          color={isActive ? 'var(--gold-light)' : 'var(--text-dim)'}
+                          style={{
+                            transform: isActive ? 'translateX(4px)' : 'none',
+                            transition: 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+                            flexShrink: 0,
+                          }}
+                        />
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
             </div>
           </ScrollCard>
 
           {/* Column 2: Active Service Ritual Architecture Card */}
-          <ScrollCard direction="bottom" delay={0.14}>
+          <ScrollCard direction="bottom" delay={0.14} className="services-col-visual">
             <div
-              className="squircle"
+              className="squircle services-card-visual"
               style={{
                 position: 'relative',
                 width: '100%',
@@ -316,7 +337,7 @@ export default function ServicesExplorer({ onOpenBooking }: ServicesExplorerProp
                   position: 'absolute',
                   inset: 0,
                   background:
-                    'linear-gradient(180deg, rgba(8, 7, 14, 0.6) 0%, rgba(6, 6, 10, 0.82) 42%, rgba(4, 4, 6, 0.96) 100%)',
+                    'linear-gradient(180deg, rgba(8, 7, 14, 0.6) 0%, rgba(6, 6, 10, 0.84) 45%, rgba(4, 4, 6, 0.98) 100%)',
                   zIndex: 1,
                   pointerEvents: 'none',
                 }}
@@ -324,6 +345,7 @@ export default function ServicesExplorer({ onOpenBooking }: ServicesExplorerProp
 
               {/* Inner Content Container */}
               <div
+                className="services-card-visual-inner"
                 style={{
                   position: 'relative',
                   zIndex: 2,
@@ -336,7 +358,7 @@ export default function ServicesExplorer({ onOpenBooking }: ServicesExplorerProp
                 }}
               >
                 <div>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '22px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '18px' }}>
                     <div
                       style={{
                         width: '42px',
@@ -373,13 +395,29 @@ export default function ServicesExplorer({ onOpenBooking }: ServicesExplorerProp
                     </div>
                   </div>
 
+                  {/* Subtitle */}
+                  <div
+                    style={{
+                      fontFamily: 'var(--font-sans-display)',
+                      fontSize: '0.7rem',
+                      fontWeight: 700,
+                      letterSpacing: '0.22em',
+                      color: 'var(--gold-primary)',
+                      textTransform: 'uppercase',
+                      marginBottom: '6px',
+                    }}
+                  >
+                    {current.subtitle}
+                  </div>
+
                   <BlurText
+                    key={`title-${current.num}`}
                     as="h3"
                     text={current.title}
                     delay={35}
                     style={{
                       fontFamily: 'var(--font-serif-display)',
-                      fontSize: '1.35rem',
+                      fontSize: 'clamp(1.25rem, 2.6vw, 1.45rem)',
                       fontWeight: 700,
                       letterSpacing: '0.04em',
                       color: '#ffffff',
@@ -388,18 +426,18 @@ export default function ServicesExplorer({ onOpenBooking }: ServicesExplorerProp
                     }}
                   />
 
-                  <BlurText
-                    as="p"
-                    text={current.description}
-                    delay={20}
+                  <p
+                    key={`desc-${current.num}`}
                     style={{
                       fontFamily: 'var(--font-sans-display)',
                       fontSize: '0.84rem',
                       lineHeight: 1.6,
                       color: 'rgba(235, 235, 240, 0.85)',
-                      marginBottom: '24px',
+                      marginBottom: '20px',
                     }}
-                  />
+                  >
+                    {current.description}
+                  </p>
 
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                     <div
@@ -417,7 +455,7 @@ export default function ServicesExplorer({ onOpenBooking }: ServicesExplorerProp
                     </div>
                     {current.highlights.map((h, i) => (
                       <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                        <CheckCircle2 size={14} color="var(--gold-light)" />
+                        <CheckCircle2 size={14} color="var(--gold-light)" style={{ flexShrink: 0 }} />
                         <span
                           style={{
                             fontFamily: 'var(--font-sans-display)',
@@ -431,47 +469,118 @@ export default function ServicesExplorer({ onOpenBooking }: ServicesExplorerProp
                       </div>
                     ))}
                   </div>
-                </div>
 
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    paddingTop: '18px',
-                    borderTop: '1px solid rgba(255, 255, 255, 0.12)',
-                    marginTop: '20px',
-                  }}
-                >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'rgba(255, 255, 255, 0.75)' }}>
-                    <Clock size={13} />
-                    <span style={{ fontFamily: 'var(--font-sans-display)', fontSize: '0.74rem', letterSpacing: '0.12em' }}>
-                      {current.duration}
+                  {/* Luxury Feature Chips (visible on mobile/tablet) */}
+                  <div className="services-mobile-chips" style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginTop: '16px' }}>
+                    <span
+                      style={{
+                        fontSize: '0.62rem',
+                        letterSpacing: '0.12em',
+                        padding: '4px 10px',
+                        borderRadius: '14px',
+                        backgroundColor: 'rgba(212, 175, 55, 0.08)',
+                        border: '1px solid rgba(212, 175, 55, 0.22)',
+                        color: 'var(--gold-light)',
+                        fontWeight: 700,
+                        textTransform: 'uppercase',
+                      }}
+                    >
+                      ✦ BESPOKE BLEND
+                    </span>
+                    <span
+                      style={{
+                        fontSize: '0.62rem',
+                        letterSpacing: '0.12em',
+                        padding: '4px 10px',
+                        borderRadius: '14px',
+                        backgroundColor: 'rgba(212, 175, 55, 0.08)',
+                        border: '1px solid rgba(212, 175, 55, 0.22)',
+                        color: 'var(--gold-light)',
+                        fontWeight: 700,
+                        textTransform: 'uppercase',
+                      }}
+                    >
+                      ✦ PRIVATE SUITE
+                    </span>
+                    <span
+                      style={{
+                        fontSize: '0.62rem',
+                        letterSpacing: '0.12em',
+                        padding: '4px 10px',
+                        borderRadius: '14px',
+                        backgroundColor: 'rgba(212, 175, 55, 0.08)',
+                        border: '1px solid rgba(212, 175, 55, 0.22)',
+                        color: 'var(--gold-light)',
+                        fontWeight: 700,
+                        textTransform: 'uppercase',
+                      }}
+                    >
+                      ✦ MASTER ARTISANS
                     </span>
                   </div>
+                </div>
 
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--gold-light)' }}>
-                    <ShieldCheck size={14} />
-                    <span style={{ fontFamily: 'var(--font-sans-display)', fontSize: '0.74rem', fontWeight: 700, letterSpacing: '0.1em' }}>
-                      {current.price}
-                    </span>
+                <div>
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      paddingTop: '16px',
+                      borderTop: '1px solid rgba(255, 255, 255, 0.12)',
+                      marginTop: '18px',
+                    }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'rgba(255, 255, 255, 0.75)' }}>
+                      <Clock size={13} style={{ flexShrink: 0 }} />
+                      <span style={{ fontFamily: 'var(--font-sans-display)', fontSize: '0.74rem', letterSpacing: '0.12em', whiteSpace: 'nowrap' }}>
+                        {current.duration}
+                      </span>
+                    </div>
+
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--gold-light)' }}>
+                      <ShieldCheck size={14} style={{ flexShrink: 0 }} />
+                      <span style={{ fontFamily: 'var(--font-sans-display)', fontSize: '0.74rem', fontWeight: 700, letterSpacing: '0.1em', whiteSpace: 'nowrap' }}>
+                        {current.price}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Mobile Booking CTA inside Active Card */}
+                  <div className="services-mobile-action-bar" style={{ marginTop: '16px' }}>
+                    <button
+                      onClick={handleBookingClick}
+                      className="btn-secondary-gold squircle-sm"
+                      style={{
+                        width: '100%',
+                        padding: '12px 20px',
+                        fontSize: '0.76rem',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '8px',
+                      }}
+                    >
+                      <span>RESERVE THIS EXPERIENCE</span>
+                      <ArrowRight size={14} />
+                    </button>
                   </div>
                 </div>
               </div>
             </div>
-        </ScrollCard>
+          </ScrollCard>
 
-        {/* Column 3: Service Detail Action Card (Matching Architectural Container) */}
-        <ScrollCard direction="right" delay={0.22}>
-          <ModernTiltCard
-            className="squircle"
-            maxTilt={8}
-            style={{
-              width: '100%',
-              height: '100%',
-              minHeight: '520px',
-              boxSizing: 'border-box',
-            }}
+          {/* Column 3: Service Detail Action Card (Matching Architectural Container) */}
+          <ScrollCard direction="right" delay={0.22} className="services-col-action">
+            <ModernTiltCard
+              className="squircle"
+              maxTilt={8}
+              style={{
+                width: '100%',
+                height: '100%',
+                minHeight: '520px',
+                boxSizing: 'border-box',
+              }}
             innerStyle={{
               padding: '32px 28px',
               display: 'flex',

@@ -100,6 +100,8 @@ export const ScrollCard: React.FC<ScrollCardProps> = ({
       style={{
         height: '100%',
         width: '100%',
+        minWidth: 0,
+        maxWidth: '100%',
         display: 'flex',
         flexDirection: 'column',
         ...style,
@@ -112,6 +114,8 @@ export const ScrollCard: React.FC<ScrollCardProps> = ({
         style={{
           height: '100%',
           width: '100%',
+          minWidth: 0,
+          maxWidth: '100%',
           display: 'flex',
           flexDirection: 'column',
           willChange: 'transform, opacity',

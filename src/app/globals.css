@@ -943,21 +943,57 @@ h1, h2, h3, h4, h5, h6, p, span, a, button, input, textarea, select {
 }
 
 @media (max-width: 1024px) {
+  .services-section {
+    padding: clamp(64px, 8vw, 90px) 0 clamp(48px, 6vw, 70px) !important;
+    min-height: auto !important;
+  }
   .services-exact-grid {
-    grid-template-columns: 1fr !important;
-    gap: 32px !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 24px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+  }
+  .services-exact-grid > * {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
   }
   .services-selectors-container {
     min-height: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+  .services-categories-wrapper {
+    position: relative !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+  }
+  .services-categories-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 8px;
+    width: 36px;
+    background: linear-gradient(90deg, rgba(4, 4, 6, 0) 0%, #040406 100%);
+    pointer-events: none;
+    z-index: 2;
   }
   .services-categories-list {
     display: flex !important;
     flex-direction: row !important;
     overflow-x: auto !important;
-    padding-bottom: 8px !important;
+    padding: 6px 20px 12px 2px !important;
     gap: 8px !important;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
+    min-width: 0 !important;
+    width: 100% !important;
+    scroll-behavior: smooth;
   }
   .services-categories-list::-webkit-scrollbar {
     display: none;
@@ -965,13 +1001,46 @@ h1, h2, h3, h4, h5, h6, p, span, a, button, input, textarea, select {
   .services-category-btn {
     flex-shrink: 0 !important;
     white-space: nowrap !important;
-    padding: 10px 18px !important;
+    padding: 8px 14px !important;
+    border-radius: 999px !important;
+    font-size: 0.76rem !important;
+  }
+  .services-cat-arrow {
+    display: none !important;
+  }
+  .services-card-visual {
+    min-height: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+  .services-card-visual-inner {
+    min-height: auto !important;
+    padding: clamp(22px, 4.5vw, 32px) clamp(16px, 4vw, 26px) !important;
+  }
+  .services-col-action {
+    display: none !important;
+  }
+  .services-mobile-action-bar {
+    display: flex !important;
+  }
+  .services-mobile-chips {
+    display: flex !important;
   }
 }
 
 @media (min-width: 1025px) {
   .services-exact-grid {
     grid-template-columns: minmax(270px, 0.95fr) minmax(330px, 1.25fr) minmax(290px, 1.05fr) !important;
+  }
+  .services-mobile-action-bar {
+    display: none !important;
+  }
+  .services-mobile-chips {
+    display: none !important;
+  }
+  .services-col-action {
+    display: block !important;
   }
 }
 
