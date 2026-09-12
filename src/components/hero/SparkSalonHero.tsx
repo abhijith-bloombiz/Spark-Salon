@@ -5,7 +5,6 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import HeroCanvas, { HeroCanvasHandle } from './HeroCanvas';
 import HeroOverlay, { HeroOverlayHandle } from './HeroOverlay';
-import HeroLoader from './HeroLoader';
 import { HERO_FRAME_SET, getBreakpointConfig } from './heroConfig';
 import { useHeroFrameSequence } from './useHeroFrameSequence';
 
@@ -166,13 +165,7 @@ export default function SparkSalonHero({
         onExploreServices={onExploreServices}
       />
 
-      {/* 3. Minimal, progress-driven critical window loader (< 15% window) */}
-      <HeroLoader
-        progress={loaderState.criticalProgress}
-        isReady={loaderState.isCriticalWindowLoaded || reducedMotion}
-      />
-
-      {/* 4. Accessible <noscript> fallback with static poster and core content */}
+      {/* 3. Accessible <noscript> fallback with static poster and core content */}
       <noscript>
         <div
           style={{

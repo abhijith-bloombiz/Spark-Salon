@@ -22,10 +22,18 @@ export default function SectionCornerAccent({
   zIndex = 50,
 }: SectionCornerAccentProps) {
   const shouldReduceMotion = useReducedMotion();
-  const wrapperRef = useRef<HTMLDivElement>(null);
 
-  // Trigger when entering view, re-animates smoothly on forward and reverse scroll
-  const isInView = useInView(wrapperRef, {
+  // Independent observer for top-left corner
+  const topLeftRef = useRef<HTMLDivElement>(null);
+  const isTopLeftInView = useInView(topLeftRef, {
+    once: false,
+    amount: 0.12,
+    margin: '0px 0px -40px 0px',
+  });
+
+  // Independent observer for bottom-right corner
+  const bottomRightRef = useRef<HTMLDivElement>(null);
+  const isBottomRightInView = useInView(bottomRightRef, {
     once: false,
     amount: 0.12,
     margin: '0px 0px -40px 0px',
@@ -35,39 +43,33 @@ export default function SectionCornerAccent({
   const showBottomRight = corner === 'both' || corner === 'bottom-right';
 
   return (
-    <div
-      ref={wrapperRef}
-      style={{
-        position: 'absolute',
-        inset: 0,
-        pointerEvents: 'none',
-        userSelect: 'none',
-        zIndex,
-        overflow: 'hidden',
-        ...style,
-      }}
-      className={`section-corner-accents ${className}`.trim()}
-      aria-hidden="true"
-    >
+    <>
       {/* TOP-LEFT CORNER ACCENT */}
       {showTopLeft && (
         <div
+          ref={topLeftRef}
           style={{
             position: 'absolute',
             top: 0,
             left: 0,
             width,
+            pointerEvents: 'none',
+            userSelect: 'none',
+            zIndex,
             lineHeight: 0,
+            ...style,
           }}
+          className={`section-corner-accent-top-left ${className}`.trim()}
+          aria-hidden="true"
         >
           <motion.div
-            initial={shouldReduceMotion ? false : { x: '-35%', y: '-35%', opacity: 0, scale: 0.92 }}
+            initial={shouldReduceMotion ? false : { x: '-40%', y: '-40%', opacity: 0, scale: 0.92 }}
             animate={
               shouldReduceMotion
                 ? { opacity }
-                : isInView
+                : isTopLeftInView
                 ? { x: '0%', y: '0%', opacity, scale: 1 }
-                : { x: '-35%', y: '-35%', opacity: 0, scale: 0.92 }
+                : { x: '-40%', y: '-40%', opacity: 0, scale: 0.92 }
             }
             transition={{
               duration: 1.05,
@@ -102,22 +104,29 @@ export default function SectionCornerAccent({
       {/* BOTTOM-RIGHT CORNER ACCENT */}
       {showBottomRight && (
         <div
+          ref={bottomRightRef}
           style={{
             position: 'absolute',
-            bottom: 0,
             right: 0,
+            bottom: 0,
             width,
+            pointerEvents: 'none',
+            userSelect: 'none',
+            zIndex,
             lineHeight: 0,
+            ...style,
           }}
+          className={`section-corner-accent-bottom-right ${className}`.trim()}
+          aria-hidden="true"
         >
           <motion.div
-            initial={shouldReduceMotion ? false : { x: '35%', y: '35%', opacity: 0, scale: 0.92 }}
+            initial={shouldReduceMotion ? false : { x: '40%', y: '40%', opacity: 0, scale: 0.92 }}
             animate={
               shouldReduceMotion
                 ? { opacity }
-                : isInView
+                : isBottomRightInView
                 ? { x: '0%', y: '0%', opacity, scale: 1 }
-                : { x: '35%', y: '35%', opacity: 0, scale: 0.92 }
+                : { x: '40%', y: '40%', opacity: 0, scale: 0.92 }
             }
             transition={{
               duration: 1.05,
@@ -148,6 +157,6 @@ export default function SectionCornerAccent({
           </motion.div>
         </div>
       )}
-    </div>
+    </>
   );
 }

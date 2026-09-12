@@ -13,6 +13,8 @@ export default function Preloader({ onComplete }: PreloaderProps) {
   const [videoLoaded, setVideoLoaded] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const completedRef = useRef(false);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const exitTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   const finishLoading = useCallback(() => {
     if (completedRef.current) return;
@@ -25,16 +27,20 @@ export default function Preloader({ onComplete }: PreloaderProps) {
       // Graceful fallback if chime cannot play
     }
 
-    const timer = setTimeout(() => {
+    timerRef.current = setTimeout(() => {
       setStage('done');
-      const exitTimer = setTimeout(() => {
+      exitTimerRef.current = setTimeout(() => {
         onComplete();
       }, 700);
-      return () => clearTimeout(exitTimer);
     }, 450);
-
-    return () => clearTimeout(timer);
   }, [onComplete]);
+
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+      if (exitTimerRef.current) clearTimeout(exitTimerRef.current);
+    };
+  }, []);
 
   // Synchronize progress with video time updates
   const handleTimeUpdate = () => {
@@ -56,7 +62,7 @@ export default function Preloader({ onComplete }: PreloaderProps) {
     finishLoading();
   };
 
-  // Video autoplay & safety fallback timer
+  // Video autoplay & safety fallback timer matching 3s video duration
   useEffect(() => {
     const video = videoRef.current;
     if (video) {
@@ -65,7 +71,7 @@ export default function Preloader({ onComplete }: PreloaderProps) {
       });
     }
 
-    // Fallback timer ensures progress reaches 100% even if video playback is delayed
+    // Safety fallback timer matching the 3s video duration (increments ~3.3% per 100ms)
     const fallbackInterval = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
@@ -73,7 +79,7 @@ export default function Preloader({ onComplete }: PreloaderProps) {
           finishLoading();
           return 100;
         }
-        const inc = Math.floor(Math.random() * 8) + 4;
+        const inc = Math.floor(Math.random() * 3) + 3;
         const next = Math.min(prev + inc, 100);
         if (next >= 100) {
           clearInterval(fallbackInterval);
@@ -81,7 +87,7 @@ export default function Preloader({ onComplete }: PreloaderProps) {
         }
         return next;
       });
-    }, 75);
+    }, 100);
 
     return () => clearInterval(fallbackInterval);
   }, [finishLoading]);
