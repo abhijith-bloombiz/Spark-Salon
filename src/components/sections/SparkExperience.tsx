@@ -3,7 +3,7 @@
 import React from 'react';
 import { Scissors, Sparkles, Crown, Gem, ArrowRight } from 'lucide-react';
 import BorderGlow from '@/components/ui/BorderGlow';
-import { BlurText, ScrollCard } from '@/components/ui';
+import { BlurText, ScrollCard, SectionCornerAccent } from '@/components/ui';
 
 export default function SparkExperience() {
   const cards = [
@@ -348,6 +348,9 @@ export default function SparkExperience() {
           </div>
         </ScrollCard>
       </div>
+
+      {/* Decorative Bottom-Right Corner Accent */}
+      <SectionCornerAccent />
     </section>
   );
 }

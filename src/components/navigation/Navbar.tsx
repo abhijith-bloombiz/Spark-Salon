@@ -87,8 +87,8 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
           role="navigation"
           aria-label="Main Navigation"
           width="clamp(320px, 94vw, 1380px)"
-          height={scrolled ? 64 : 76}
-          borderRadius={scrolled ? 22 : 26}
+          height={64}
+          borderRadius={22}
           borderWidth={0.07}
           brightness={scrolled ? 48 : 55}
           opacity={0.92}
@@ -108,19 +108,19 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
             border: 'none',
             outline: 'none',
             userSelect: 'none',
-            transition: 'all 0.38s cubic-bezier(0.16, 1, 0.3, 1)',
+            transition:
+              'box-shadow 0.38s cubic-bezier(0.16, 1, 0.3, 1), background 0.38s cubic-bezier(0.16, 1, 0.3, 1)',
           }}
           contentClassName="spark-floating-navbar-content"
           contentStyle={{
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            padding: scrolled ? '0 14px 0 0' : '0 18px 0 0',
+            padding: '0 16px 0 0',
             width: '100%',
             height: '100%',
             position: 'relative',
             zIndex: 1,
-            transition: 'padding 0.3s ease',
           }}
         >
           {/* Top Specular Rim Reflection - Ultra-Fine Modern Optical Bevel */}
@@ -196,9 +196,8 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
               className="spark-nav-divider"
               style={{
                 width: '1px',
-                height: scrolled ? '20px' : '24px',
+                height: '20px',
                 backgroundColor: 'rgba(255, 255, 255, 0.18)',
-                transition: 'height 0.3s ease',
               }}
             />
 

@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { ArrowRight, Scissors, Sparkles, Crown, Palette, Heart, Gem, CheckCircle2, Clock, ShieldCheck } from 'lucide-react';
-import { BlurText, ScrollCard, ModernTiltCard } from '@/components/ui';
+import { BlurText, ScrollCard, ModernTiltCard, SectionCornerAccent } from '@/components/ui';
 
 interface ServicesExplorerProps {
   onOpenBooking?: (studio: string) => void;
@@ -639,6 +639,9 @@ export default function ServicesExplorer({ onOpenBooking }: ServicesExplorerProp
         </ScrollCard>
         </div>
       </div>
+
+      {/* Decorative Bottom-Right Corner Accent */}
+      <SectionCornerAccent />
     </section>
   );
 }

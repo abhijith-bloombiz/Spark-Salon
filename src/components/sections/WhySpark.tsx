@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { BlurText, ScrollCard } from '@/components/ui';
+import { BlurText, ScrollCard, SectionCornerAccent } from '@/components/ui';
 
 export default function WhySpark() {
   const pillars = [
@@ -274,6 +274,9 @@ export default function WhySpark() {
           </div>
         </ScrollCard>
       </div>
+
+      {/* Decorative Bottom-Right Corner Accent */}
+      <SectionCornerAccent />
     </section>
   );
 }

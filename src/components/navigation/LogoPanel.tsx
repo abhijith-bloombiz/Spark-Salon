@@ -39,11 +39,10 @@ export default function LogoPanel({ scrolled = false, onLogoClick }: LogoPanelPr
         display: 'flex',
         alignItems: 'center',
         height: '100%',
-        paddingLeft: scrolled ? '18px' : '22px',
+        paddingLeft: '18px',
         paddingRight: '16px',
         cursor: 'pointer',
         userSelect: 'none',
-        transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
         flexShrink: 0,
         outline: 'none',
       }}

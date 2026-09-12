@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { Play, MapPin, Clock, X, Sparkles, Layers, Compass, Eye } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { BlurText, ScrollCard, ModernTiltCard } from '@/components/ui';
+import { BlurText, ScrollCard, ModernTiltCard, SectionCornerAccent } from '@/components/ui';
 
 export default function VirtualTour() {
   const [isPlayingTour, setIsPlayingTour] = useState(false);
@@ -574,6 +574,9 @@ export default function VirtualTour() {
           </div>
         </div>
       )}
+
+      {/* Decorative Bottom-Right Corner Accent */}
+      <SectionCornerAccent />
     </section>
   );
 }

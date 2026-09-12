@@ -8,9 +8,9 @@ interface MenuButtonProps {
   onClick: () => void;
 }
 
-export default function MenuButton({ scrolled = false, isOpen = false, onClick }: MenuButtonProps) {
+export default function MenuButton({ isOpen = false, onClick }: MenuButtonProps) {
   const [isHovered, setIsHovered] = useState(false);
-  const size = scrolled ? 38 : 44;
+  const size = 36;
 
   return (
     <button
@@ -39,7 +39,6 @@ export default function MenuButton({ scrolled = false, isOpen = false, onClick }
         outline: 'none',
         padding: 0,
         transform: isHovered ? 'scale(1.05)' : 'scale(1)',
-        transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
         flexShrink: 0,
       }}
     >

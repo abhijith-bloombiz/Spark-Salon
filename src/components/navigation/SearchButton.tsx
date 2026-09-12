@@ -8,8 +8,8 @@ interface SearchButtonProps {
   onClick: () => void;
 }
 
-export default function SearchButton({ scrolled = false, onClick }: SearchButtonProps) {
-  const size = scrolled ? 38 : 44;
+export default function SearchButton({ onClick }: SearchButtonProps) {
+  const size = 36;
 
   return (
     <button
@@ -31,13 +31,12 @@ export default function SearchButton({ scrolled = false, onClick }: SearchButton
         outline: 'none',
         padding: 0,
         color: '#f4f1ea',
-        transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
         flexShrink: 0,
       }}
     >
       {/* Centered Search Icon matching reference */}
       <Search
-        size={scrolled ? 16 : 18}
+        size={16}
         strokeWidth={2}
         className="spark-search-icon"
         style={{

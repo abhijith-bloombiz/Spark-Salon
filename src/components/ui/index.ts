@@ -9,4 +9,5 @@ export * from './ScrollCard';
 export { default as ModernTiltCard } from './ModernTiltCard';
 export * from './ModernTiltCard';
 export { default as SquircleSvgDefs } from './SquircleSvgDefs';
-
+export { default as SectionCornerAccent } from './SectionCornerAccent';
+export * from './SectionCornerAccent';

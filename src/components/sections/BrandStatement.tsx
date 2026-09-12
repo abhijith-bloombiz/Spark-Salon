@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Sparkles } from 'lucide-react';
-import { BlurText, ScrollCard, ModernTiltCard } from '@/components/ui';
+import { BlurText, ScrollCard, ModernTiltCard, SectionCornerAccent } from '@/components/ui';
 
 export default function BrandStatement() {
   return (
@@ -285,6 +285,9 @@ export default function BrandStatement() {
           transform: scale(1.07) !important;
         }
       `}</style>
+
+      {/* Decorative Bottom-Right Corner Accent */}
+      <SectionCornerAccent />
     </section>
   );
 }

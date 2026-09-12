@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { ChevronLeft, ChevronRight, Quote, Star, CheckCircle, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { BlurText, ScrollCard, ModernTiltCard } from '@/components/ui';
+import { BlurText, ScrollCard, ModernTiltCard, SectionCornerAccent } from '@/components/ui';
 
 export default function Testimonials() {
   const [currentIdx, setCurrentIdx] = useState(0);
@@ -482,6 +482,9 @@ export default function Testimonials() {
           </ScrollCard>
         </div>
       </div>
+
+      {/* Decorative Bottom-Right Corner Accent */}
+      <SectionCornerAccent />
     </section>
   );
 }

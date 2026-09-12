@@ -20,8 +20,8 @@ export default function BookingButton({ scrolled = false, onClick }: BookingButt
       className="spark-booking-btn squircle-sm"
       style={{
         position: 'relative',
-        height: scrolled ? '38px' : '46px',
-        padding: scrolled ? '0 18px' : '0 22px',
+        height: '38px',
+        padding: '0 18px',
         background: 'transparent',
         backdropFilter: 'none',
         WebkitBackdropFilter: 'none',
@@ -54,12 +54,11 @@ export default function BookingButton({ scrolled = false, onClick }: BookingButt
       <span
         style={{
           fontFamily: 'var(--font-sans-display), "Inter", -apple-system, sans-serif',
-          fontSize: scrolled ? '0.78rem' : '0.86rem',
+          fontSize: '0.8rem',
           fontWeight: 500,
           letterSpacing: '0.04em',
           color: '#f4f1ea',
           whiteSpace: 'nowrap',
-          transition: 'font-size 0.3s ease',
         }}
       >
         Book Appointment
@@ -67,7 +66,7 @@ export default function BookingButton({ scrolled = false, onClick }: BookingButt
 
       {/* Right Arrow matching reference */}
       <ArrowRight
-        size={scrolled ? 14 : 16}
+        size={14}
         color="#f3e5ab"
         strokeWidth={2}
         style={{

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { ArrowRight, X, Sparkles } from 'lucide-react';
-import { BlurText, ScrollCard } from '@/components/ui';
+import { BlurText, ScrollCard, SectionCornerAccent } from '@/components/ui';
 import './GallerySection.css';
 
 interface GalleryCardData {
@@ -608,6 +608,9 @@ export default function GallerySection() {
           </div>
         </div>
       )}
+
+      {/* Decorative Bottom-Right Corner Accent */}
+      <SectionCornerAccent />
     </section>
   );
 }

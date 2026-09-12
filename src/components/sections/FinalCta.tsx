@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { ArrowRight, Sparkles, CheckCircle2, PhoneCall, Calendar } from 'lucide-react';
-import { BlurText, ScrollCard, ModernTiltCard } from '@/components/ui';
+import { BlurText, ScrollCard, ModernTiltCard, SectionCornerAccent } from '@/components/ui';
 
 export default function FinalCta() {
   const scrollTo = (id: string) => {
@@ -220,6 +220,9 @@ export default function FinalCta() {
           </div>
         </div>
       </div>
+
+      {/* Decorative Bottom-Right Corner Accent */}
+      <SectionCornerAccent />
     </section>
   );
 }
