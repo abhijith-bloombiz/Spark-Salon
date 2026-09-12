@@ -69,7 +69,7 @@ export default function SearchModal({ isOpen, onClose, onBookTreatment }: Search
         display: 'flex',
         alignItems: 'flex-start',
         justifyContent: 'center',
-        padding: '120px 20px 40px',
+        padding: 'clamp(60px, 10vh, 120px) clamp(12px, 3vw, 20px) 20px',
         animation: 'sparkFadeIn 0.25s ease forwards',
       }}
     >
@@ -83,8 +83,8 @@ export default function SearchModal({ isOpen, onClose, onBookTreatment }: Search
           border: '1px solid rgba(201, 164, 92, 0.5)',
           borderRadius: '24px',
           boxShadow: '0 30px 90px rgba(0, 0, 0, 0.95), 0 0 30px rgba(201, 164, 92, 0.2)',
-          padding: '24px 28px',
-          maxHeight: '80vh',
+          padding: 'clamp(16px, 3vw, 24px) clamp(16px, 3vw, 28px)',
+          maxHeight: '85vh',
           display: 'flex',
           flexDirection: 'column',
         }}

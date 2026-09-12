@@ -231,7 +231,7 @@ export default function Testimonials() {
                   gap: '16px',
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
                   <button
                     onClick={prev}
                     aria-label="Previous Testimonial"
@@ -248,7 +248,7 @@ export default function Testimonials() {
                     <ChevronRight size={18} />
                   </button>
 
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginLeft: '12px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
                     {testimonials.map((t, i) => {
                       const isActive = currentIdx === i;
                       return (

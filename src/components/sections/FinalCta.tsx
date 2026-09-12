@@ -25,7 +25,7 @@ export default function FinalCta() {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: '120px 0 40px',
+        padding: 'clamp(60px, 8vw, 120px) 0 40px',
         backgroundColor: '#040406',
         overflow: 'hidden',
         borderTop: '1px solid rgba(212, 175, 55, 0.15)',
@@ -53,7 +53,7 @@ export default function FinalCta() {
                   maxWidth: '460px',
                 }}
                 innerStyle={{
-                  padding: '44px 36px',
+                  padding: 'clamp(24px, 4vw, 44px) clamp(20px, 3.5vw, 36px)',
                   height: '100%',
                 }}
               >

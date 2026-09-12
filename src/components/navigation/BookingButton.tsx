@@ -50,8 +50,9 @@ export default function BookingButton({ scrolled = false, onClick }: BookingButt
         }}
       />
 
-      {/* Button Label matching reference */}
+      {/* Button Label matching reference (adapts on small mobile screens) */}
       <span
+        className="spark-booking-text-full"
         style={{
           fontFamily: 'var(--font-sans-display), "Inter", -apple-system, sans-serif',
           fontSize: '0.8rem',
@@ -62,6 +63,19 @@ export default function BookingButton({ scrolled = false, onClick }: BookingButt
         }}
       >
         Book Appointment
+      </span>
+      <span
+        className="spark-booking-text-short"
+        style={{
+          fontFamily: 'var(--font-sans-display), "Inter", -apple-system, sans-serif',
+          fontSize: '0.78rem',
+          fontWeight: 600,
+          letterSpacing: '0.04em',
+          color: '#f4f1ea',
+          whiteSpace: 'nowrap',
+        }}
+      >
+        Book
       </span>
 
       {/* Right Arrow matching reference */}

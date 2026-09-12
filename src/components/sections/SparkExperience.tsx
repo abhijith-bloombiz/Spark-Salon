@@ -89,6 +89,7 @@ export default function SparkExperience() {
             as="div"
             text={"MORE THAN A SALON.\nIT'S A FEELING."}
             delay={35}
+            className="experience-header-tagline"
             style={{
               fontFamily: 'var(--font-sans-display)',
               fontSize: '0.78rem',
@@ -129,7 +130,7 @@ export default function SparkExperience() {
                   coneSpread={26}
                   colors={['#d4af37', '#f3e7c4', '#c59b27']}
                   style={{
-                    minHeight: '450px',
+                    minHeight: 'clamp(360px, 46vh, 450px)',
                     height: '100%',
                     cursor: 'pointer',
                     transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
@@ -139,7 +140,7 @@ export default function SparkExperience() {
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'space-between',
-                    minHeight: '450px',
+                    minHeight: 'clamp(360px, 46vh, 450px)',
                     height: '100%',
                     overflow: 'hidden',
                     position: 'relative',

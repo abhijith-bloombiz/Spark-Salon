@@ -281,7 +281,7 @@ export default function BookingConcierge({ initialStudio = 'hair', initialServic
             backdropFilter: 'blur(30px)',
             border: '1px solid rgba(212, 175, 55, 0.3)',
             borderRadius: 'var(--squircle-xl, 26px)',
-            padding: 'clamp(2rem, 4vw, 3.5rem)',
+            padding: 'clamp(1.25rem, 3.5vw, 3.5rem)',
             boxShadow: '0 30px 90px rgba(0, 0, 0, 0.9), var(--gold-glow)',
           }}
         >
@@ -325,7 +325,7 @@ export default function BookingConcierge({ initialStudio = 'hair', initialServic
               </div>
 
               {/* Specific Services Radio Cards */}
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '14px', marginBottom: '36px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '14px', marginBottom: '36px' }}>
                 {currentStudioObj.items.map((srv) => {
                   const isSelected = selectedService === srv.name || (!selectedService && srv === currentStudioObj.items[0]);
                   return (
@@ -511,7 +511,7 @@ export default function BookingConcierge({ initialStudio = 'hair', initialServic
                 >
                   PREFERRED TIME SLOT
                 </label>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(120px, 1fr))', gap: '10px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(95px, 1fr))', gap: '8px' }}>
                   {timeSlots.map((slot) => {
                     const isSelected = selectedTime === slot;
                     return (

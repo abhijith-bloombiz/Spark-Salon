@@ -211,7 +211,7 @@ export default function Footer({ onOpenBooking }: FooterProps) {
 
             {/* Column 2: Navigation Links matching footer.png */}
             <ScrollCard direction="bottom" delay={0.12}>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', paddingLeft: '20px' }}>
+              <div className="footer-col-nav" style={{ display: 'flex', flexDirection: 'column', gap: '14px', paddingLeft: '20px' }}>
                 {[
                   { label: 'HOME', id: 'hero' },
                   { label: 'ABOUT', id: 'statement' },
@@ -257,7 +257,7 @@ export default function Footer({ onOpenBooking }: FooterProps) {
 
             {/* Column 3: Let's Connect + Contact Info + Button */}
             <ScrollCard direction="right" delay={0.18}>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '18px', paddingLeft: '20px' }}>
+              <div className="footer-col-contact" style={{ display: 'flex', flexDirection: 'column', gap: '18px', paddingLeft: '20px' }}>
                 <BlurText
                   as="h4"
                   text="LET'S CONNECT"
@@ -384,6 +384,7 @@ export default function Footer({ onOpenBooking }: FooterProps) {
           {/* Bottom Bar matching footer.png */}
           <ScrollCard direction="bottom" delay={0.1}>
             <div
+              className="footer-bottom-bar"
               style={{
                 display: 'flex',
                 alignItems: 'center',

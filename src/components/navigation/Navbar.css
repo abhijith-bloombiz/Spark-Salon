@@ -40,6 +40,35 @@
   }
 }
 
+.spark-booking-text-short {
+  display: none !important;
+}
+
+@media (max-width: 440px) {
+  .spark-booking-text-full {
+    display: none !important;
+  }
+  .spark-booking-text-short {
+    display: inline !important;
+  }
+  .spark-booking-btn {
+    padding: 0 12px !important;
+    height: 34px !important;
+    gap: 5px !important;
+  }
+  .spark-logo-panel {
+    padding-left: 10px !important;
+    padding-right: 6px !important;
+  }
+  .spark-logo-subtext {
+    display: none !important;
+  }
+  .spark-floating-navbar {
+    height: 58px !important;
+    border-radius: 18px !important;
+  }
+}
+
 .spark-nav-link {
   background: transparent !important;
   background-color: transparent !important;

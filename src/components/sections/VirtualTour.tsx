@@ -511,7 +511,7 @@ export default function VirtualTour() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            padding: '24px',
+            padding: 'clamp(10px, 2.5vw, 24px)',
           }}
           onClick={() => setIsPlayingTour(false)}
         >

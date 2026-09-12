@@ -166,9 +166,9 @@ export default function FullscreenMenu({
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-          gap: ' clamp(16px, 2.5vw, 36px)',
-          margin: 'clamp(28px, 4vh, 48px) 0',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+          gap: 'clamp(12px, 2vw, 24px)',
+          margin: 'clamp(20px, 3vh, 40px) 0',
         }}
       >
         {MENU_LINKS.map((link, idx) => (

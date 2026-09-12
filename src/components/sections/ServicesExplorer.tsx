@@ -132,6 +132,7 @@ export default function ServicesExplorer({ onOpenBooking }: ServicesExplorerProp
           {/* Column 1: Stacked Title & 6 Interactive Category Selectors */}
           <ScrollCard direction="left" delay={0.06}>
             <div
+              className="services-selectors-container"
               style={{
                 display: 'flex',
                 flexDirection: 'column',
@@ -183,14 +184,14 @@ export default function ServicesExplorer({ onOpenBooking }: ServicesExplorerProp
                 />
               </div>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              <div className="services-categories-list" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 {categories.map((cat, idx) => {
                   const isActive = activeIdx === idx;
                   return (
                     <button
                       key={cat.num}
                       onClick={() => setActiveIdx(idx)}
-                      className="squircle-sm"
+                      className={`squircle-sm services-category-btn ${isActive ? 'is-active' : ''}`}
                       style={{
                         display: 'flex',
                         alignItems: 'center',

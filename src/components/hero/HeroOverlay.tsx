@@ -123,9 +123,9 @@ const HeroOverlay = forwardRef<HeroOverlayHandle, HeroOverlayProps>(function Her
           <div
             style={{
               position: 'relative',
-              minHeight: 'clamp(250px, 30vh, 340px)',
+              minHeight: 'clamp(180px, 26vh, 340px)',
               width: '100%',
-              marginBottom: '28px',
+              marginBottom: 'clamp(16px, 3vh, 28px)',
             }}
           >
             <AnimatePresence mode="wait">
@@ -153,17 +153,17 @@ const HeroOverlay = forwardRef<HeroOverlayHandle, HeroOverlayProps>(function Her
                   style={{
                     display: 'inline-flex',
                     alignItems: 'center',
-                    gap: '10px',
+                    gap: '8px',
                     fontFamily: 'var(--font-sans-display)',
-                    fontSize: '0.78rem',
+                    fontSize: 'clamp(0.68rem, 1.2vw, 0.78rem)',
                     fontWeight: 800,
-                    letterSpacing: '0.3em',
+                    letterSpacing: '0.24em',
                     color: 'var(--gold-primary)',
                     textTransform: 'uppercase',
-                    marginBottom: '16px',
+                    marginBottom: '12px',
                   }}
                 >
-                  <Sparkles size={15} color="#d4af37" />
+                  <Sparkles size={14} color="#d4af37" />
                   <BlurText
                     as="span"
                     text={currentSlide.eyebrow}
@@ -184,13 +184,13 @@ const HeroOverlay = forwardRef<HeroOverlayHandle, HeroOverlayProps>(function Her
                   ready={isRevealed}
                   style={{
                     fontFamily: 'var(--font-serif-display)',
-                    fontSize: 'clamp(2.6rem, 5.8vw, 4.8rem)',
+                    fontSize: 'clamp(1.85rem, 5.5vw, 4.8rem)',
                     fontWeight: 800,
-                    lineHeight: 1.05,
+                    lineHeight: 1.08,
                     letterSpacing: '0.03em',
                     color: '#ffffff',
                     textTransform: 'uppercase',
-                    marginBottom: '18px',
+                    marginBottom: '14px',
                     textShadow: '0 4px 24px rgba(0, 0, 0, 0.85)',
                   }}
                 />
@@ -204,8 +204,8 @@ const HeroOverlay = forwardRef<HeroOverlayHandle, HeroOverlayProps>(function Her
                   ready={isRevealed}
                   style={{
                     fontFamily: 'var(--font-sans-display)',
-                    fontSize: 'clamp(0.92rem, 1.3vw, 1.12rem)',
-                    lineHeight: 1.7,
+                    fontSize: 'clamp(0.85rem, 1.2vw, 1.12rem)',
+                    lineHeight: 1.65,
                     color: 'rgba(255, 255, 255, 0.88)',
                     maxWidth: '580px',
                     textShadow: '0 2px 14px rgba(0, 0, 0, 0.9)',
@@ -229,14 +229,15 @@ const HeroOverlay = forwardRef<HeroOverlayHandle, HeroOverlayProps>(function Her
               delay: 0.55,
               ease: [0.16, 1, 0.3, 1],
             }}
-            style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', alignItems: 'center' }}
+            style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', alignItems: 'center' }}
+            className="hero-action-ctas"
           >
             <button
               onClick={onOpenBooking}
               className="btn-primary-crimson squircle-sm"
               style={{
-                padding: '16px 34px',
-                fontSize: '0.82rem',
+                padding: 'clamp(12px, 2vh, 16px) clamp(22px, 3vw, 34px)',
+                fontSize: 'clamp(0.75rem, 1.1vw, 0.82rem)',
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '10px',
@@ -252,8 +253,8 @@ const HeroOverlay = forwardRef<HeroOverlayHandle, HeroOverlayProps>(function Her
               onClick={onExploreServices}
               className="btn-secondary-gold squircle-sm"
               style={{
-                padding: '15px 30px',
-                fontSize: '0.82rem',
+                padding: 'clamp(12px, 2vh, 15px) clamp(20px, 2.5vw, 30px)',
+                fontSize: 'clamp(0.75rem, 1.1vw, 0.82rem)',
                 cursor: 'pointer',
               }}
             >
@@ -262,11 +263,12 @@ const HeroOverlay = forwardRef<HeroOverlayHandle, HeroOverlayProps>(function Her
           </motion.div>
         </div>
 
-        {/* Scroll Indicator */}
+        {/* Scroll Indicator (Hidden on mobile screens < 768px) */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={isRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
           transition={{ duration: 0.9, delay: 0.75, ease: [0.16, 1, 0.3, 1] }}
+          className="hero-scroll-indicator-wrapper"
           style={{
             position: 'absolute',
             right: 0,

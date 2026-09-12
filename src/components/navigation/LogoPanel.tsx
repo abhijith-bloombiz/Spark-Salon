@@ -123,6 +123,7 @@ export default function LogoPanel({ scrolled = false, onLogoClick }: LogoPanelPr
             SPARK
           </span>
           <span
+            className="spark-logo-subtext"
             style={{
               fontFamily: 'var(--font-sans-display), "Inter", sans-serif',
               fontSize: scrolled ? '0.45rem' : '0.52rem',
@@ -137,6 +138,7 @@ export default function LogoPanel({ scrolled = false, onLogoClick }: LogoPanelPr
             INTERNATIONAL
           </span>
           <span
+            className="spark-logo-subtext"
             style={{
               fontFamily: 'var(--font-sans-display), "Inter", sans-serif',
               fontSize: scrolled ? '0.38rem' : '0.44rem',

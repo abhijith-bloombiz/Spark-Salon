@@ -15,7 +15,7 @@ export default function BrandStatement() {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: '120px 0 80px',
+        padding: 'clamp(70px, 8vw, 120px) 0 clamp(40px, 6vw, 80px)',
         backgroundColor: '#040406',
         overflow: 'hidden',
         borderTop: '1px solid rgba(212, 175, 55, 0.15)',
@@ -25,8 +25,8 @@ export default function BrandStatement() {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
-            gap: '60px 80px',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gap: 'clamp(32px, 5vw, 60px) clamp(24px, 5vw, 80px)',
             alignItems: 'center',
           }}
         >
