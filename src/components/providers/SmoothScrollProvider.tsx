@@ -98,14 +98,10 @@ export default function SmoothScrollProvider({ children }: SmoothScrollProviderP
     []
   );
 
-  // If user prefers reduced motion, render native tree without Lenis wrapper
-  if (reducedMotion || !mounted) {
-    return <>{children}</>;
-  }
-
+  // Always render ReactLenis so children tree is never unmounted/remounted during hydration
   return (
     <ReactLenis root options={options} autoRaf={false}>
-      <LenisGsapSync />
+      {mounted && !reducedMotion && <LenisGsapSync />}
       {children}
     </ReactLenis>
   );

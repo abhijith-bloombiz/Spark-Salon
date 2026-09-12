@@ -16,10 +16,17 @@ import Footer from '@/components/layout/Footer';
 import BookingConcierge from '@/components/sections/BookingConcierge';
 import { X } from 'lucide-react';
 
+let hasShownPreloader = false;
+
 export default function HomePage() {
-  const [preloaderDone, setPreloaderDone] = useState(false);
+  const [preloaderDone, setPreloaderDone] = useState(() => hasShownPreloader);
   const [bookingModalOpen, setBookingModalOpen] = useState(false);
   const [initialStudio, setInitialStudio] = useState('hair');
+
+  const handlePreloaderComplete = () => {
+    hasShownPreloader = true;
+    setPreloaderDone(true);
+  };
 
   const handleOpenBooking = (studio = 'hair') => {
     setInitialStudio(studio);
@@ -29,7 +36,7 @@ export default function HomePage() {
   return (
     <main style={{ position: 'relative', minHeight: '100vh', backgroundColor: '#040406' }}>
       {/* 01 — 3D CINEMATIC INTRO PRELOADER (matching loading.png) */}
-      {!preloaderDone && <Preloader onComplete={() => setPreloaderDone(true)} />}
+      {!preloaderDone && <Preloader onComplete={handlePreloaderComplete} />}
 
       {/* ULTRA LUXURY FLOATING NAVBAR MATCHING EXACT REFERENCE IMAGE */}
       <Navbar onOpenBooking={() => handleOpenBooking('hair')} />
