@@ -102,17 +102,11 @@ export default function Navbar({ onOpenBooking, isRevealed = true }: NavbarProps
   };
 
   const isEffectivelyHidden = !isRevealed || (navHidden && !menuOpen && !searchOpen);
-
-  // macOS App Open & Minimize (Suck / Genie) Suction Effect
-  // - Sucking/Minimizing: squashes horizontally & vertically towards the top center anchor point
-  // - Opening/Restoring: blossoms out with an organic spring bounce
-  const headerTransform = isEffectivelyHidden
-    ? 'translateY(-56px) scale(0.24, 0.08)'
-    : 'translateY(0) scale(1, 1)';
-  const headerOpacity = isEffectivelyHidden ? 0 : 1;
-  const headerTransition = isEffectivelyHidden
-    ? 'top 0.35s ease, transform 0.34s cubic-bezier(0.55, 0.055, 0.675, 0.19), opacity 0.22s ease'
-    : 'top 0.35s ease, transform 0.44s cubic-bezier(0.16, 1.18, 0.3, 1), opacity 0.32s ease';
+  const genieClass = !isRevealed
+    ? 'macos-genie-prereveal'
+    : isEffectivelyHidden
+    ? 'macos-genie-minimized'
+    : 'macos-genie-opened';
 
   return (
     <>
@@ -127,10 +121,7 @@ export default function Navbar({ onOpenBooking, isRevealed = true }: NavbarProps
           justifyContent: 'center',
           padding: 0,
           pointerEvents: isEffectivelyHidden ? 'none' : 'auto',
-          transformOrigin: '50% -12px',
-          transform: headerTransform,
-          opacity: headerOpacity,
-          transition: headerTransition,
+          transition: 'top 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
         }}
       >
         <GlassSurface
@@ -153,7 +144,7 @@ export default function Navbar({ onOpenBooking, isRevealed = true }: NavbarProps
           greenOffset={8}
           blueOffset={14}
           onMouseMove={handleMouseMove}
-          className={`spark-floating-navbar ${scrolled ? 'is-scrolled' : ''}`}
+          className={`spark-floating-navbar ${scrolled ? 'is-scrolled' : ''} ${genieClass}`}
           style={{
             pointerEvents: isEffectivelyHidden ? 'none' : 'auto',
             position: 'relative',

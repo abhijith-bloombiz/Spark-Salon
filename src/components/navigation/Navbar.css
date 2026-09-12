@@ -100,8 +100,189 @@
   .spark-booking-btn,
   .spark-search-btn,
   .spark-menu-btn,
-  .spark-fullscreen-item {
+  .spark-fullscreen-item,
+  .spark-floating-navbar.macos-genie-minimized,
+  .spark-floating-navbar.macos-genie-opened {
     transition: none !important;
     animation: none !important;
+  }
+}
+
+/* ==========================================================================
+   macOS Genie (App Open & Minimize) Fluid Funnel Effect
+   Preserves 100% SVG liquid glass displacement & chromatic aberration
+   ========================================================================== */
+.spark-floating-navbar {
+  transform-origin: 50% -16px;
+  will-change: transform, opacity, clip-path;
+}
+
+.spark-floating-navbar.macos-genie-minimized {
+  animation: macosGenieMinimize 0.38s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  pointer-events: none !important;
+}
+
+.spark-floating-navbar.macos-genie-opened {
+  animation: macosGenieOpen 0.52s cubic-bezier(0.16, 1.15, 0.3, 1) forwards;
+}
+
+.spark-floating-navbar.macos-genie-prereveal {
+  transform: translateY(-60px) scale(0.1, 0.04) !important;
+  clip-path: polygon(
+    48% 0%,
+    50% 0%,
+    52% 0%,
+    53% 15%,
+    55% 50%,
+    50% 60%,
+    45% 50%,
+    47% 15%
+  ) !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+@keyframes macosGenieMinimize {
+  0% {
+    transform: translateY(0) scale(1, 1);
+    clip-path: polygon(
+      0% 0%,
+      50% 0%,
+      100% 0%,
+      100% 50%,
+      100% 100%,
+      50% 100%,
+      0% 100%,
+      0% 50%
+    );
+    opacity: 1;
+  }
+  24% {
+    /* Step 1: Genie neck begins siphoning towards top-center; bottom flares into wide amphora */
+    transform: translateY(-8px) scale(0.88, 0.82);
+    clip-path: polygon(
+      20% 0%,
+      50% 0%,
+      80% 0%,
+      96% 45%,
+      98% 100%,
+      50% 100%,
+      2% 100%,
+      4% 45%
+    );
+    opacity: 0.98;
+  }
+  54% {
+    /* Step 2: The Genie Waist pinches dramatically inwards into a slender siphon neck */
+    transform: translateY(-28px) scale(0.55, 0.45);
+    clip-path: polygon(
+      36% 0%,
+      50% 0%,
+      64% 0%,
+      74% 35%,
+      82% 95%,
+      50% 100%,
+      18% 95%,
+      26% 35%
+    );
+    opacity: 0.85;
+  }
+  80% {
+    /* Step 3: Fluid siphon stream stretching into the top anchor point */
+    transform: translateY(-46px) scale(0.28, 0.18);
+    clip-path: polygon(
+      44% 0%,
+      50% 0%,
+      56% 0%,
+      60% 25%,
+      66% 85%,
+      50% 95%,
+      34% 85%,
+      40% 25%
+    );
+    opacity: 0.45;
+  }
+  100% {
+    /* Step 4: Sucked into the needle point */
+    transform: translateY(-60px) scale(0.1, 0.04);
+    clip-path: polygon(
+      48% 0%,
+      50% 0%,
+      52% 0%,
+      53% 15%,
+      55% 50%,
+      50% 60%,
+      45% 50%,
+      47% 15%
+    );
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+@keyframes macosGenieOpen {
+  0% {
+    transform: translateY(-58px) scale(0.1, 0.04);
+    clip-path: polygon(
+      48% 0%,
+      50% 0%,
+      52% 0%,
+      53% 15%,
+      55% 50%,
+      50% 60%,
+      45% 50%,
+      47% 15%
+    );
+    opacity: 0;
+  }
+  26% {
+    /* The genie vapor shoots down: nozzle stays anchored at top, bottom bells wide */
+    transform: translateY(-16px) scale(0.65, 0.62);
+    clip-path: polygon(
+      32% 0%,
+      50% 0%,
+      68% 0%,
+      78% 35%,
+      92% 95%,
+      50% 100%,
+      8% 95%,
+      22% 35%
+    );
+    opacity: 0.88;
+  }
+  58% {
+    /* The bottom billows outwards into full width with liquid spring expansion */
+    transform: translateY(3px) scale(1.035, 1.02);
+    clip-path: polygon(
+      6% 0%,
+      50% 0%,
+      94% 0%,
+      100% 48%,
+      100% 100%,
+      50% 100%,
+      0% 100%,
+      0% 48%
+    );
+    opacity: 1;
+  }
+  84% {
+    /* Elastic ripple settling */
+    transform: translateY(-1px) scale(0.995, 0.99);
+    clip-path: polygon(
+      0% 0%,
+      50% 0%,
+      100% 0%,
+      100% 50%,
+      100% 100%,
+      50% 100%,
+      0% 100%,
+      0% 50%
+    );
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0) scale(1, 1);
+    clip-path: none;
+    opacity: 1;
   }
 }
