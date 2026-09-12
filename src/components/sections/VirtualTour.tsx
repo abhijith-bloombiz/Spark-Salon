@@ -47,10 +47,6 @@ export default function VirtualTour() {
         justifyContent: 'space-between',
         padding: 'clamp(70px, 7.5vw, 92px) 0 36px',
         backgroundColor: '#040406',
-        backgroundImage: "url('/images/sections/bg-2.webp')",
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
         overflow: 'hidden',
         borderTop: '1px solid rgba(212, 175, 55, 0.15)',
       }}

@@ -47,10 +47,6 @@ export default function WhySpark() {
         position: 'relative',
         padding: 'clamp(70px, 7.5vw, 95px) 0 45px',
         backgroundColor: '#040406',
-        backgroundImage: "url('/images/sections/bg-2.webp')",
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
         overflow: 'hidden',
         borderTop: '1px solid rgba(212, 175, 55, 0.15)',
       }}

@@ -52,10 +52,6 @@ export default function SparkExperience() {
         position: 'relative',
         padding: '95px 0 75px',
         backgroundColor: '#040406',
-        backgroundImage: "url('/images/sections/bg-2.webp')",
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
         overflow: 'hidden',
         borderTop: '1px solid rgba(212, 175, 55, 0.15)',
       }}

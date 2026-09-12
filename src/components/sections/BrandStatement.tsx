@@ -17,10 +17,6 @@ export default function BrandStatement() {
         justifyContent: 'center',
         padding: '120px 0 80px',
         backgroundColor: '#040406',
-        backgroundImage: "url('/images/sections/bg-2.webp')",
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
         overflow: 'hidden',
         borderTop: '1px solid rgba(212, 175, 55, 0.15)',
       }}

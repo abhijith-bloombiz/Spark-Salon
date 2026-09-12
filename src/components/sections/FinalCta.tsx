@@ -27,10 +27,6 @@ export default function FinalCta() {
         justifyContent: 'space-between',
         padding: '120px 0 40px',
         backgroundColor: '#040406',
-        backgroundImage: "url('/images/sections/bg-2.webp')",
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
         overflow: 'hidden',
         borderTop: '1px solid rgba(212, 175, 55, 0.15)',
       }}

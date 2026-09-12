@@ -6,10 +6,6 @@
 .gallery-section-root {
   position: relative;
   background-color: #040406;
-  background-image: url('/images/sections/bg-2.webp');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   overflow: hidden;
   height: 100vh;
   min-height: 620px;
