@@ -75,9 +75,11 @@ const GlassSurface = forwardRef<HTMLElement, GlassSurfaceProps>(function GlassSu
   const gaussianBlurRef = useRef<SVGFEGaussianBlurElement | null>(null);
 
   const generateDisplacementMap = () => {
-    const rect = containerRef.current?.getBoundingClientRect();
-    const actualWidth = rect?.width || (typeof width === 'number' ? width : 400);
-    const actualHeight = rect?.height || (typeof height === 'number' ? height : 200);
+    const el = containerRef.current;
+    const rawWidth = el?.offsetWidth || (typeof width === 'number' ? width : 1200);
+    const rawHeight = el?.offsetHeight || (typeof height === 'number' ? height : 64);
+    const actualWidth = Math.max(120, rawWidth);
+    const actualHeight = Math.max(24, rawHeight);
     const edgeSize = Math.max(1, Math.min(actualWidth, actualHeight) * (borderWidth * 0.5));
 
     const svgContent = `
