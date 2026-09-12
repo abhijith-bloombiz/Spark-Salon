@@ -57,11 +57,11 @@ export default function Navbar({ onOpenBooking, isRevealed = true }: NavbarProps
       }
 
       // When not scrolling (user stops moving):
-      // Reverse back smoothly down into view!
+      // Reverse back quickly and smoothly down into view!
       if (idleTimer) clearTimeout(idleTimer);
       idleTimer = setTimeout(() => {
         setNavHidden(false);
-      }, 650);
+      }, 180);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -102,12 +102,11 @@ export default function Navbar({ onOpenBooking, isRevealed = true }: NavbarProps
   };
 
   const isEffectivelyHidden = !isRevealed || (navHidden && !menuOpen && !searchOpen);
-  const transformValue = !isRevealed
-    ? 'translateY(-22px)'
+  const suckClass = !isRevealed
+    ? 'macos-suck-prereveal'
     : isEffectivelyHidden
-    ? 'translateY(-140%)'
-    : 'translateY(0)';
-  const opacityValue = isEffectivelyHidden ? 0 : 1;
+    ? 'macos-suck-minimized'
+    : 'macos-suck-opened';
 
   return (
     <>
@@ -122,12 +121,18 @@ export default function Navbar({ onOpenBooking, isRevealed = true }: NavbarProps
           justifyContent: 'center',
           padding: 0,
           pointerEvents: 'none',
-          opacity: opacityValue,
-          transform: transformValue,
-          transition:
-            'top 0.38s cubic-bezier(0.16, 1, 0.3, 1), transform 0.48s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease',
+          transition: 'top 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
         }}
       >
+        <div
+          className={`macos-suck-container ${suckClass}`}
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            width: '100%',
+            pointerEvents: isEffectivelyHidden ? 'none' : 'auto',
+          }}
+        >
         <GlassSurface
           ref={navRef}
           as="nav"
@@ -261,6 +266,7 @@ export default function Navbar({ onOpenBooking, isRevealed = true }: NavbarProps
             </div>
           </div>
         </GlassSurface>
+        </div>
       </header>
 
       {/* Fullscreen Editorial Navigation Overlay */}
