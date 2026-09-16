@@ -127,7 +127,7 @@ export default function ServicesExplorer({ onOpenBooking }: ServicesExplorerProp
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: '120px 0 90px',
+        padding: 'clamp(70px, 7.5vw, 100px) 0',
         backgroundColor: '#040406',
         overflow: 'hidden',
         borderTop: '1px solid rgba(212, 175, 55, 0.15)',
@@ -590,50 +590,56 @@ export default function ServicesExplorer({ onOpenBooking }: ServicesExplorerProp
             }}
           >
             <div>
-              <BlurText
-                as="div"
-                text={current.subtitle}
-                delay={25}
-                style={{
-                  fontFamily: 'var(--font-sans-display)',
-                  fontSize: '0.72rem',
-                  fontWeight: 800,
-                  letterSpacing: '0.22em',
-                  color: 'var(--gold-primary)',
-                  textTransform: 'uppercase',
-                  marginBottom: '10px',
-                }}
-              />
+              {/* 3D Tier SM: Subtitle */}
+              <div className="tilt-z-sm" style={{ marginBottom: '10px' }}>
+                <BlurText
+                  as="div"
+                  text={current.subtitle}
+                  delay={25}
+                  style={{
+                    fontFamily: 'var(--font-sans-display)',
+                    fontSize: '0.72rem',
+                    fontWeight: 800,
+                    letterSpacing: '0.22em',
+                    color: 'var(--gold-primary)',
+                    textTransform: 'uppercase',
+                  }}
+                />
+              </div>
 
-              <BlurText
-                as="h3"
-                text="Elevate Your Personal Aesthetic"
-                delay={35}
-                style={{
-                  fontFamily: 'var(--font-serif-display)',
-                  fontSize: '1.5rem',
-                  fontWeight: 700,
-                  color: '#ffffff',
-                  marginBottom: '16px',
-                  lineHeight: 1.25,
-                }}
-              />
+              {/* 3D Tier MD: Heading */}
+              <div className="tilt-z-md" style={{ marginBottom: '16px' }}>
+                <BlurText
+                  as="h3"
+                  text="Elevate Your Personal Aesthetic"
+                  delay={35}
+                  style={{
+                    fontFamily: 'var(--font-serif-display)',
+                    fontSize: '1.5rem',
+                    fontWeight: 700,
+                    color: '#ffffff',
+                    lineHeight: 1.25,
+                  }}
+                />
+              </div>
 
-              <BlurText
-                as="p"
-                delay={20}
-                text="Every treatment begins with an in-depth private consultation with our senior stylists and dermatologists, tailoring formulas and techniques specifically to your natural texture and skin profile."
-                style={{
-                  fontFamily: 'var(--font-sans-display)',
-                  fontSize: '0.84rem',
-                  lineHeight: 1.7,
-                  color: 'var(--text-muted)',
-                  marginBottom: '20px',
-                }}
-              />
+              {/* 3D Tier XS: Description */}
+              <div className="tilt-z-xs" style={{ marginBottom: '20px' }}>
+                <BlurText
+                  as="p"
+                  delay={20}
+                  text="Every treatment begins with an in-depth private consultation with our senior stylists and dermatologists, tailoring formulas and techniques specifically to your natural texture and skin profile."
+                  style={{
+                    fontFamily: 'var(--font-sans-display)',
+                    fontSize: '0.84rem',
+                    lineHeight: 1.7,
+                    color: 'var(--text-muted)',
+                  }}
+                />
+              </div>
 
-              {/* Luxury Feature Chips */}
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '24px' }}>
+              {/* 3D Tier SM: Luxury Feature Chips */}
+              <div className="tilt-z-sm" style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '24px' }}>
                 <span
                   style={{
                     fontSize: '0.64rem',
@@ -681,27 +687,30 @@ export default function ServicesExplorer({ onOpenBooking }: ServicesExplorerProp
                 </span>
               </div>
 
-              {/* Luxury Liquid Gold CTA Button */}
-              <button
-                onClick={handleBookingClick}
-                className="btn-secondary-gold squircle-sm"
-                style={{
-                  width: '100%',
-                  padding: '14px 24px',
-                  fontSize: '0.76rem',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '10px',
-                }}
-              >
-                <span>RESERVE THIS EXPERIENCE</span>
-                <ArrowRight size={14} />
-              </button>
+              {/* 3D Tier LG: Luxury Liquid Gold CTA Button */}
+              <div className="tilt-z-lg">
+                <button
+                  onClick={handleBookingClick}
+                  className="btn-secondary-gold squircle-sm"
+                  style={{
+                    width: '100%',
+                    padding: '14px 24px',
+                    fontSize: '0.76rem',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '10px',
+                  }}
+                >
+                  <span>RESERVE THIS EXPERIENCE</span>
+                  <ArrowRight size={14} />
+                </button>
+              </div>
             </div>
 
-            {/* Bottom 01 — 06 indicator aligned with Column 2 bottom baseline */}
+            {/* 3D Tier SM: Bottom 01 — 06 indicator */}
             <div
+              className="tilt-z-sm"
               style={{
                 display: 'flex',
                 alignItems: 'center',

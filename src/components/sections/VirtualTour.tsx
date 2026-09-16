@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { Play, MapPin, Clock, X, Sparkles, Layers, Compass, Eye } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { BlurText, ScrollCard, ModernTiltCard, SectionCornerAccent } from '@/components/ui';
+import { BlurText, ScrollCard, ModernTiltCard, TiltItem, SectionCornerAccent } from '@/components/ui';
 
 export default function VirtualTour() {
   const [isPlayingTour, setIsPlayingTour] = useState(false);
@@ -45,7 +45,7 @@ export default function VirtualTour() {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: 'clamp(70px, 7.5vw, 92px) 0 36px',
+        padding: 'clamp(70px, 7.5vw, 100px) 0',
         backgroundColor: '#040406',
         overflow: 'hidden',
         borderTop: '1px solid rgba(212, 175, 55, 0.15)',
@@ -276,7 +276,9 @@ export default function VirtualTour() {
                 padding: '28px 24px',
               }}
             >
+              {/* 3D Tier SM: Header */}
               <div
+                className="tilt-z-sm"
                 style={{
                   display: 'flex',
                   alignItems: 'center',
@@ -309,8 +311,8 @@ export default function VirtualTour() {
                 </span>
               </div>
 
-              {/* Zones Tabs */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '18px' }}>
+              {/* 3D Tier MD: Zones Tabs */}
+              <div className="tilt-z-md" style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '18px' }}>
                 {zones.map((zone, idx) => {
                   const isActive = activeZone === idx;
                   return (
@@ -368,9 +370,9 @@ export default function VirtualTour() {
                 })}
               </div>
 
-              {/* Active Zone Visual Showcase Card with Buttery Smooth Crossfade */}
+              {/* 3D Tier LG: Active Zone Visual Showcase Card */}
               <div
-                className="squircle-sm"
+                className="tilt-z-lg squircle-sm"
                 style={{
                   position: 'relative',
                   width: '100%',

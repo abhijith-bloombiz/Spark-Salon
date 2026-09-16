@@ -6,6 +6,16 @@ class SparkAudioEngine {
   private masterGain: GainNode | null = null;
   private oscillators: OscillatorNode[] = [];
   private filter: BiquadFilterNode | null = null;
+  private pendingChime: boolean = false;
+  private gestureListenerAttached: boolean = false;
+
+  private hasUserGesture(): boolean {
+    if (typeof window === 'undefined') return false;
+    if ((navigator as any)?.userActivation) {
+      return !!(navigator as any).userActivation.hasBeenActive;
+    }
+    return false;
+  }
 
   private initContext() {
     if (!this.ctx && typeof window !== 'undefined') {
@@ -16,12 +26,40 @@ class SparkAudioEngine {
     }
   }
 
+  private attachGestureListener() {
+    if (this.gestureListenerAttached || typeof window === 'undefined') return;
+    this.gestureListenerAttached = true;
+    const unlock = () => {
+      window.removeEventListener('pointerdown', unlock);
+      window.removeEventListener('keydown', unlock);
+      this.gestureListenerAttached = false;
+      if (this.ctx && this.ctx.state === 'suspended') {
+        this.ctx.resume().catch(() => {});
+      }
+      if (this.pendingChime) {
+        this.pendingChime = false;
+        this.playEntryChime();
+      }
+    };
+    window.addEventListener('pointerdown', unlock, { once: true, passive: true });
+    window.addEventListener('keydown', unlock, { once: true, passive: true });
+  }
+
   public playEntryChime() {
     try {
+      if (typeof window === 'undefined') return;
+
+      // Comply with browser Autoplay Policy: defer chime until first user gesture if not active yet
+      if (!this.hasUserGesture()) {
+        this.pendingChime = true;
+        this.attachGestureListener();
+        return;
+      }
+
       this.initContext();
       if (!this.ctx) return;
       if (this.ctx.state === 'suspended') {
-        this.ctx.resume();
+        this.ctx.resume().catch(() => {});
       }
 
       // Play an ethereal 3-note luxury chime (F# - A# - C#)
@@ -43,8 +81,8 @@ class SparkAudioEngine {
         osc.start(this.ctx!.currentTime + idx * 0.15);
         osc.stop(this.ctx!.currentTime + idx * 0.15 + 2.0);
       });
-    } catch (e) {
-      console.warn('Audio chime notice:', e);
+    } catch {
+      // Graceful fallback
     }
   }
 
@@ -57,7 +95,7 @@ class SparkAudioEngine {
       this.initContext();
       if (!this.ctx) return;
       if (this.ctx.state === 'suspended') {
-        this.ctx.resume();
+        this.ctx.resume().catch(() => {});
       }
       const osc = this.ctx.createOscillator();
       const gain = this.ctx.createGain();
@@ -95,7 +133,7 @@ class SparkAudioEngine {
       this.initContext();
       if (!this.ctx) return;
       if (this.ctx.state === 'suspended') {
-        this.ctx.resume();
+        this.ctx.resume().catch(() => {});
       }
 
       this.stopAmbient();

@@ -61,7 +61,7 @@ export default function Testimonials() {
       id="testimonials"
       style={{
         position: 'relative',
-        padding: 'clamp(70px, 7.5vw, 95px) 0 65px',
+        padding: 'clamp(70px, 7.5vw, 100px) 0',
         backgroundColor: '#040406',
         overflow: 'hidden',
         borderTop: '1px solid rgba(212, 175, 55, 0.15)',
@@ -317,8 +317,8 @@ export default function Testimonials() {
                   height: '100%',
                 }}
               >
-                {/* Top: Gold Quote Box + 5 Gold Stars */}
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '22px' }}>
+                {/* 3D Tier LG: Top Gold Quote Box + 5 Gold Stars */}
+                <div className="tilt-z-lg" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '22px' }}>
                   <div
                     style={{
                       width: '48px',
@@ -359,34 +359,39 @@ export default function Testimonials() {
 
                 {/* Middle Content: Title, Description, and Trust Metrics Grid */}
                 <div>
-                  <BlurText
-                    as="h3"
-                    text="The Spark Standard"
-                    delay={35}
-                    style={{
-                      fontFamily: 'var(--font-serif-display)',
-                      fontSize: '1.45rem',
-                      fontWeight: 700,
-                      color: '#ffffff',
-                      marginBottom: '10px',
-                      letterSpacing: '0.02em',
-                    }}
-                  />
+                  {/* 3D Tier MD: Heading */}
+                  <div className="tilt-z-md" style={{ marginBottom: '10px' }}>
+                    <BlurText
+                      as="h3"
+                      text="The Spark Standard"
+                      delay={35}
+                      style={{
+                        fontFamily: 'var(--font-serif-display)',
+                        fontSize: '1.45rem',
+                        fontWeight: 700,
+                        color: '#ffffff',
+                        letterSpacing: '0.02em',
+                      }}
+                    />
+                  </div>
 
-                  <p
-                    style={{
-                      fontFamily: 'var(--font-sans-display)',
-                      fontSize: '0.84rem',
-                      lineHeight: 1.65,
-                      color: 'var(--text-muted)',
-                      marginBottom: '22px',
-                    }}
-                  >
-                    Over 50,000 discerning clients across Kerala, Bangalore, and the Middle East trust Spark International for bespoke bridal transformations, dermatological care, and signature couture hair styling.
-                  </p>
+                  {/* 3D Tier XS: Description */}
+                  <div className="tilt-z-xs" style={{ marginBottom: '22px' }}>
+                    <p
+                      style={{
+                        fontFamily: 'var(--font-sans-display)',
+                        fontSize: '0.84rem',
+                        lineHeight: 1.65,
+                        color: 'var(--text-muted)',
+                      }}
+                    >
+                      Over 50,000 discerning clients across Kerala, Bangalore, and the Middle East trust Spark International for bespoke bridal transformations, dermatological care, and signature couture hair styling.
+                    </p>
+                  </div>
 
-                  {/* 3 Luxury Trust Metric Badges */}
+                  {/* 3D Tier SM: 3 Luxury Trust Metric Badges */}
                   <div
+                    className="tilt-z-sm"
                     style={{
                       display: 'grid',
                       gridTemplateColumns: 'repeat(3, 1fr)',
@@ -437,8 +442,9 @@ export default function Testimonials() {
                   </div>
                 </div>
 
-                {/* Bottom verified badge */}
+                {/* 3D Tier SM: Bottom verified badge */}
                 <div
+                  className="tilt-z-sm"
                   style={{
                     display: 'flex',
                     alignItems: 'center',

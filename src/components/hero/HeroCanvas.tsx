@@ -255,7 +255,7 @@ const HeroCanvas = forwardRef<HeroCanvasHandle, HeroCanvasProps>(function HeroCa
         overflow: 'hidden',
         pointerEvents: 'none',
         backgroundColor: '#040406',
-        backgroundImage: "url('/hero/sequence/frame_0001.webp')",
+        backgroundImage: "url('/hero/poster.webp')",
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         ...style,

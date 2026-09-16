@@ -19,22 +19,22 @@ export interface HeroBreakpointConfig {
   scrub: number;
 }
 
-// 120 high-fidelity WebP frames extracted from bg-hero-video.mp4 (1280x720)
-// Indices 0..119 directly mapped to /hero/sequence/frame_0001.webp .. frame_0120.webp
+// 220 high-fidelity WebP frames extracted from hero-video.mp4 (1280x720)
+// Indices 0..219 directly mapped to /hero/sequence/frame_0001.webp .. frame_0220.webp
 export const HERO_FRAME_SET: HeroFrameSet = {
-  frameCount: 120,
+  frameCount: 220,
   basePath: '/hero/sequence/frame_',
   digits: 4,
   width: 1280,
   height: 720,
-  posterPath: '/hero/sequence/frame_0001.webp',
+  posterPath: '/hero/poster.webp',
 };
 
-// Critical window: first 4 frames required before unmasking loader
-export const CRITICAL_WINDOW_FRAME_COUNT = 4;
+// Critical window: first 6 frames required before unmasking loader
+export const CRITICAL_WINDOW_FRAME_COUNT = 6;
 
 // Concurrency cap for background image fetching & decoding (keeps network & CPU free for 120fps scrolling)
-export const BACKGROUND_LOAD_CONCURRENCY = 2;
+export const BACKGROUND_LOAD_CONCURRENCY = 4;
 
 // Per-breakpoint ScrollTrigger configuration
 export const BREAKPOINTS: HeroBreakpointConfig[] = [

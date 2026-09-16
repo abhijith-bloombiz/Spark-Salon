@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useRef, useCallback } from 'react';
+import './ModernTiltCard.css';
 
 interface ModernTiltCardProps {
   children: React.ReactNode;
@@ -39,21 +40,17 @@ export default function ModernTiltCard({
 
       const rotY = (xPercent * maxTilt).toFixed(2);
       const rotX = (-yPercent * maxTilt).toFixed(2);
-      const glareX = ((x / width) * 100).toFixed(1);
-      const glareY = ((y / height) * 100).toFixed(1);
 
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
       rafRef.current = requestAnimationFrame(() => {
         card.style.setProperty('--rot-x', `${rotX}deg`);
         card.style.setProperty('--rot-y', `${rotY}deg`);
-        card.style.setProperty('--glare-x', `${glareX}%`);
-        card.style.setProperty('--glare-y', `${glareY}%`);
-        card.style.setProperty('--card-scale', '1.018');
-        card.style.setProperty('--glare-opacity', '1');
-        card.style.setProperty('--border-color', 'rgba(212, 175, 55, 0.55)');
+        card.style.setProperty('--tilt-x', `${xPercent.toFixed(3)}`);
+        card.style.setProperty('--tilt-y', `${yPercent.toFixed(3)}`);
+        card.style.setProperty('--border-color', 'rgba(212, 175, 55, 0.45)');
         card.style.setProperty(
           '--card-shadow',
-          '0 30px 70px rgba(0, 0, 0, 0.95), 0 0 35px rgba(212, 175, 55, 0.18)'
+          '0 30px 70px rgba(0, 0, 0, 0.95)'
         );
       });
     },
@@ -63,29 +60,27 @@ export default function ModernTiltCard({
   const handleMouseEnter = useCallback(() => {
     const card = cardRef.current;
     if (!card) return;
+    card.classList.add('is-hovered');
     card.style.transition = 'transform 0.12s ease-out, box-shadow 0.3s ease, border-color 0.3s ease';
-    card.style.setProperty('--card-scale', '1.018');
-    card.style.setProperty('--glare-opacity', '1');
-    card.style.setProperty('--border-color', 'rgba(212, 175, 55, 0.55)');
+    card.style.setProperty('--border-color', 'rgba(212, 175, 55, 0.45)');
     card.style.setProperty(
       '--card-shadow',
-      '0 30px 70px rgba(0, 0, 0, 0.95), 0 0 35px rgba(212, 175, 55, 0.18)'
+      '0 30px 70px rgba(0, 0, 0, 0.95)'
     );
   }, []);
 
   const handleMouseLeave = useCallback(() => {
     const card = cardRef.current;
     if (!card) return;
+    card.classList.remove('is-hovered');
     if (rafRef.current) cancelAnimationFrame(rafRef.current);
 
     card.style.transition =
       'transform 0.55s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease';
     card.style.setProperty('--rot-x', '0deg');
     card.style.setProperty('--rot-y', '0deg');
-    card.style.setProperty('--glare-x', '50%');
-    card.style.setProperty('--glare-y', '50%');
-    card.style.setProperty('--card-scale', '1');
-    card.style.setProperty('--glare-opacity', '0');
+    card.style.setProperty('--tilt-x', '0');
+    card.style.setProperty('--tilt-y', '0');
     card.style.setProperty('--border-color', 'rgba(212, 175, 55, 0.22)');
     card.style.setProperty(
       '--card-shadow',
@@ -99,7 +94,7 @@ export default function ModernTiltCard({
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className={className}
+      className={`modern-tilt-card ${className}`.trim()}
       style={
         {
           position: 'relative',
@@ -108,14 +103,12 @@ export default function ModernTiltCard({
           perspective: '1000px',
           '--rot-x': '0deg',
           '--rot-y': '0deg',
-          '--glare-x': '50%',
-          '--glare-y': '50%',
-          '--card-scale': '1',
-          '--glare-opacity': '0',
+          '--tilt-x': '0',
+          '--tilt-y': '0',
           '--border-color': 'rgba(212, 175, 55, 0.22)',
           '--card-shadow': '0 20px 50px rgba(0, 0, 0, 0.85), 0 0 20px rgba(0, 0, 0, 0.4)',
           transform:
-            'perspective(1000px) rotateX(var(--rot-x)) rotateY(var(--rot-y)) scale3d(var(--card-scale), var(--card-scale), var(--card-scale))',
+            'perspective(1000px) rotateX(var(--rot-x)) rotateY(var(--rot-y))',
           transition:
             'transform 0.55s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease',
           background: 'rgba(11, 10, 16, 0.92)',
@@ -129,45 +122,14 @@ export default function ModernTiltCard({
         } as React.CSSProperties
       }
     >
-      {/* Dynamic Specular Glare */}
+      {/* Main Card 3D Spatial Content Container */}
       <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          pointerEvents: 'none',
-          zIndex: 5,
-          opacity: 'var(--glare-opacity)' as any,
-          transition: 'opacity 0.3s ease',
-          background:
-            'radial-gradient(circle 380px at var(--glare-x) var(--glare-y), rgba(212, 175, 55, 0.2) 0%, rgba(255, 255, 255, 0.06) 30%, transparent 75%)',
-        }}
-      />
-
-      {/* Border Highlight Following Cursor to Border Sides */}
-      <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          borderRadius: 'inherit',
-          pointerEvents: 'none',
-          zIndex: 5,
-          border: '1.5px solid transparent',
-          opacity: 'var(--glare-opacity)' as any,
-          transition: 'opacity 0.3s ease',
-          background:
-            'radial-gradient(circle 360px at var(--glare-x) var(--glare-y), rgba(212, 175, 55, 0.85) 0%, rgba(212, 175, 55, 0.15) 45%, transparent 80%) border-box',
-          WebkitMask: 'linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0)',
-          WebkitMaskComposite: 'xor',
-          maskComposite: 'exclude',
-        }}
-      />
-
-      {/* Main Card Inner Content Container */}
-      <div
+        className="modern-tilt-inner"
         style={{
           position: 'relative',
-          zIndex: 3,
+          zIndex: 2,
           height: '100%',
+          transformStyle: 'preserve-3d',
           ...innerStyle,
         }}
       >

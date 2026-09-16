@@ -25,7 +25,7 @@ export default function FinalCta() {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: 'clamp(60px, 8vw, 120px) 0 40px',
+        padding: 'clamp(70px, 7.5vw, 100px) 0',
         backgroundColor: '#040406',
         overflow: 'hidden',
         borderTop: '1px solid rgba(212, 175, 55, 0.15)',
@@ -57,7 +57,9 @@ export default function FinalCta() {
                   height: '100%',
                 }}
               >
+                {/* 3D Tier XL: Floating Gold Sparkles Emblem */}
                 <div
+                  className="tilt-z-xl"
                   style={{
                     width: '56px',
                     height: '56px',
@@ -70,53 +72,61 @@ export default function FinalCta() {
                     color: 'var(--gold-light)',
                     marginBottom: '24px',
                     boxShadow: '0 0 25px rgba(212, 175, 55, 0.25)',
+                    transition: 'all 0.4s ease',
                   }}
                 >
                   <Sparkles size={28} color="#e5c158" />
                 </div>
 
-                <BlurText
-                  as="div"
-                  text="PRIVATE ATELIER ACCESS"
-                  delay={30}
-                  style={{
-                    fontFamily: 'var(--font-sans-display)',
-                    fontSize: '0.74rem',
-                    fontWeight: 800,
-                    letterSpacing: '0.22em',
-                    color: 'var(--gold-primary)',
-                    textTransform: 'uppercase',
-                    marginBottom: '8px',
-                  }}
-                />
+                {/* 3D Tier SM: Subtitle */}
+                <div className="tilt-z-sm" style={{ marginBottom: '8px' }}>
+                  <BlurText
+                    as="div"
+                    text="PRIVATE ATELIER ACCESS"
+                    delay={30}
+                    style={{
+                      fontFamily: 'var(--font-sans-display)',
+                      fontSize: '0.74rem',
+                      fontWeight: 800,
+                      letterSpacing: '0.22em',
+                      color: 'var(--gold-primary)',
+                      textTransform: 'uppercase',
+                    }}
+                  />
+                </div>
 
-                <BlurText
-                  as="h3"
-                  text="Bespoke Appointments"
-                  delay={35}
-                  style={{
-                    fontFamily: 'var(--font-serif-display)',
-                    fontSize: '1.65rem',
-                    fontWeight: 700,
-                    color: '#ffffff',
-                    marginBottom: '16px',
-                  }}
-                />
+                {/* 3D Tier MD: Heading */}
+                <div className="tilt-z-md" style={{ marginBottom: '16px' }}>
+                  <BlurText
+                    as="h3"
+                    text="Bespoke Appointments"
+                    delay={35}
+                    style={{
+                      fontFamily: 'var(--font-serif-display)',
+                      fontSize: '1.65rem',
+                      fontWeight: 700,
+                      color: '#ffffff',
+                    }}
+                  />
+                </div>
 
-                <BlurText
-                  as="p"
-                  delay={20}
-                  text="Experience tailored hair sculpture, clinical skin therapies, and private bridal luxury designed exclusively around your schedule."
-                  style={{
-                    fontFamily: 'var(--font-sans-display)',
-                    fontSize: '0.86rem',
-                    lineHeight: 1.7,
-                    color: 'var(--text-muted)',
-                    marginBottom: '28px',
-                  }}
-                />
+                {/* 3D Tier XS: Paragraph */}
+                <div className="tilt-z-xs" style={{ marginBottom: '28px' }}>
+                  <BlurText
+                    as="p"
+                    delay={20}
+                    text="Experience tailored hair sculpture, clinical skin therapies, and private bridal luxury designed exclusively around your schedule."
+                    style={{
+                      fontFamily: 'var(--font-sans-display)',
+                      fontSize: '0.86rem',
+                      lineHeight: 1.7,
+                      color: 'var(--text-muted)',
+                    }}
+                  />
+                </div>
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                {/* 3D Tier LG: Concierge Perks */}
+                <div className="tilt-z-lg" style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                   {[
                     'Complimentary Digital Scalp & Hair Diagnostics',
                     'Private VIP Suite Dressing for Bridal Parties',

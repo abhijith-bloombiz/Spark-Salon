@@ -9,18 +9,23 @@ interface PreloaderProps {
 }
 
 export default function Preloader({ onComplete, onExitStart }: PreloaderProps) {
-  const [progress, setProgress] = useState(0);
   const [stage, setStage] = useState<'loading' | 'done'>('loading');
   const [videoLoaded, setVideoLoaded] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const completedRef = useRef(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const exitTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const fallbackTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   const finishLoading = useCallback(() => {
     if (completedRef.current) return;
     completedRef.current = true;
-    setProgress(100);
+
+    // Clear fallback timer if it hasn't fired yet
+    if (fallbackTimerRef.current) {
+      clearTimeout(fallbackTimerRef.current);
+      fallbackTimerRef.current = null;
+    }
 
     try {
       sparkAudio.playEntryChime();
@@ -41,30 +46,11 @@ export default function Preloader({ onComplete, onExitStart }: PreloaderProps) {
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
       if (exitTimerRef.current) clearTimeout(exitTimerRef.current);
+      if (fallbackTimerRef.current) clearTimeout(fallbackTimerRef.current);
     };
   }, []);
 
-  // Synchronize progress with video time updates
-  const handleTimeUpdate = () => {
-    const video = videoRef.current;
-    if (!video || !video.duration || Number.isNaN(video.duration)) return;
-    const currentPercent = Math.min(
-      Math.round((video.currentTime / video.duration) * 100),
-      100
-    );
-    setProgress((prev) => Math.max(prev, currentPercent));
-
-    if (currentPercent >= 98) {
-      finishLoading();
-    }
-  };
-
-  // When video completes natural playback
-  const handleEnded = () => {
-    finishLoading();
-  };
-
-  // Video autoplay & safety fallback timer matching 3s video duration
+  // Video autoplay & single 3.2s fallback timer (prevents interval event loop congestion)
   useEffect(() => {
     const video = videoRef.current;
     if (video) {
@@ -73,26 +59,20 @@ export default function Preloader({ onComplete, onExitStart }: PreloaderProps) {
       });
     }
 
-    // Safety fallback timer matching the 3s video duration (increments ~3.3% per 100ms)
-    const fallbackInterval = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(fallbackInterval);
-          finishLoading();
-          return 100;
-        }
-        const inc = Math.floor(Math.random() * 3) + 3;
-        const next = Math.min(prev + inc, 100);
-        if (next >= 100) {
-          clearInterval(fallbackInterval);
-          finishLoading();
-        }
-        return next;
-      });
-    }, 100);
+    // Safety fallback: if video doesn't play or takes too long, cleanly finish without polling
+    fallbackTimerRef.current = setTimeout(() => {
+      finishLoading();
+    }, 3200);
 
-    return () => clearInterval(fallbackInterval);
+    return () => {
+      if (fallbackTimerRef.current) clearTimeout(fallbackTimerRef.current);
+    };
   }, [finishLoading]);
+
+  // When video completes natural playback
+  const handleEnded = () => {
+    finishLoading();
+  };
 
   // Click anywhere to skip
   const handleSkip = () => {
@@ -128,7 +108,6 @@ export default function Preloader({ onComplete, onExitStart }: PreloaderProps) {
         playsInline
         preload="auto"
         onLoadedData={() => setVideoLoaded(true)}
-        onTimeUpdate={handleTimeUpdate}
         onEnded={handleEnded}
         style={{
           position: 'absolute',

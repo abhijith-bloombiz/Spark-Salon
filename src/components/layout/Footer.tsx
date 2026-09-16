@@ -415,7 +415,7 @@ export default function Footer({ onOpenBooking }: FooterProps) {
                   textTransform: 'uppercase',
                 }}
               >
-                © 2024 - 2026 BYJU SPARK INTERNATIONAL SALON. ALL RIGHTS RESERVED.
+                © 2026 BYJU SPARK INTERNATIONAL SALON. ALL RIGHTS RESERVED.
               </div>
             </div>
           </ScrollCard>

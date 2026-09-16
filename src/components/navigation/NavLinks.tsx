@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import gsap from 'gsap';
 
 export interface NavLinkItem {
   id: string;
@@ -23,6 +24,7 @@ interface NavLinksProps {
 export default function NavLinks({ scrolled = false, onNavigate }: NavLinksProps) {
   const [activeId, setActiveId] = useState<string>('hero');
   const activeIdRef = useRef<string>('hero');
+  const buttonRefs = useRef<Record<string, HTMLButtonElement | null>>({});
 
   useEffect(() => {
     let rafId: number | null = null;
@@ -61,6 +63,65 @@ export default function NavLinks({ scrolled = false, onNavigate }: NavLinksProps
     };
   }, []);
 
+  // Initialize hardware acceleration (force3D) on mount
+  useEffect(() => {
+    const allFront = document.querySelectorAll<HTMLElement>('.mdx-char-front');
+    const allBack = document.querySelectorAll<HTMLElement>('.mdx-char-back');
+    if (allFront.length > 0 && allBack.length > 0) {
+      gsap.set([...Array.from(allFront), ...Array.from(allBack)], { yPercent: 0, force3D: true });
+    }
+  }, []);
+
+  /**
+   * HorizonX Signature Character Rolling Flip on Mouse Enter
+   * Front letters roll up (-100%) with stagger, back letters roll into place
+   */
+  const handleMouseEnter = useCallback((id: string) => {
+    const btn = buttonRefs.current[id];
+    if (!btn) return;
+
+    const frontChars = btn.querySelectorAll<HTMLElement>('.mdx-char-front');
+    const backChars = btn.querySelectorAll<HTMLElement>('.mdx-char-back');
+    const all = [...Array.from(frontChars), ...Array.from(backChars)];
+
+    gsap.set(all, { willChange: 'transform' });
+    const enterAnim = {
+      yPercent: -100,
+      duration: 0.6,
+      stagger: 0.025,
+      ease: 'expo.out',
+      overwrite: 'auto' as const,
+    };
+    gsap.to(Array.from(frontChars), enterAnim);
+    gsap.to(Array.from(backChars), enterAnim);
+  }, []);
+
+  /**
+   * HorizonX Signature Character Rolling Flip on Mouse Leave
+   * Smoothly returns to resting state (0%) with power3.in easing
+   */
+  const handleMouseLeave = useCallback((id: string) => {
+    const btn = buttonRefs.current[id];
+    if (!btn) return;
+
+    const frontChars = btn.querySelectorAll<HTMLElement>('.mdx-char-front');
+    const backChars = btn.querySelectorAll<HTMLElement>('.mdx-char-back');
+    const all = [...Array.from(frontChars), ...Array.from(backChars)];
+
+    const leaveAnim = {
+      yPercent: 0,
+      duration: 0.45,
+      stagger: 0.018,
+      ease: 'power3.in',
+      overwrite: 'auto' as const,
+      onComplete: () => {
+        gsap.set(all, { clearProps: 'willChange' });
+      },
+    };
+    gsap.to(Array.from(frontChars), leaveAnim);
+    gsap.to(Array.from(backChars), leaveAnim);
+  }, []);
+
   const handleLinkClick = (id: string) => {
     setActiveId(id);
     if (onNavigate) {
@@ -92,8 +153,13 @@ export default function NavLinks({ scrolled = false, onNavigate }: NavLinksProps
         return (
           <li key={item.id} role="none">
             <button
+              ref={(el) => {
+                buttonRefs.current[item.id] = el;
+              }}
               role="menuitem"
               onClick={() => handleLinkClick(item.id)}
+              onMouseEnter={() => handleMouseEnter(item.id)}
+              onMouseLeave={() => handleMouseLeave(item.id)}
               aria-label={`Navigate to ${item.label}`}
               className={`spark-nav-link ${isActive ? 'is-active' : ''}`}
               style={{
@@ -104,7 +170,7 @@ export default function NavLinks({ scrolled = false, onNavigate }: NavLinksProps
                 border: 'none',
                 outline: 'none',
                 cursor: 'pointer',
-                padding: '6px 2px',
+                padding: '6px 4px',
                 fontFamily: 'var(--font-sans-display), "Inter", -apple-system, sans-serif',
                 fontSize: scrolled ? '0.85rem' : '0.92rem',
                 fontWeight: isActive ? 600 : 500,
@@ -113,36 +179,39 @@ export default function NavLinks({ scrolled = false, onNavigate }: NavLinksProps
                 textShadow: isActive
                   ? '0 0 12px rgba(201, 164, 92, 0.45), 0 0 24px rgba(201, 164, 92, 0.25)'
                   : 'none',
-                transform: isActive ? 'translateY(-1px)' : 'translateY(0)',
-                transition: 'color 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), font-size 0.3s ease',
+                transition: 'color 0.3s cubic-bezier(0.16, 1, 0.3, 1), font-size 0.3s ease',
                 display: 'inline-flex',
                 flexDirection: 'column',
                 alignItems: 'center',
                 textDecoration: 'none',
               }}
             >
-              <span>{item.label}</span>
+              {/* HorizonX Character Rolling Mask Container */}
+              <span className="mdx-link-content">
+                {item.label.split('').map((char, i) => (
+                  <span key={i} className="mdx-link-char-mask">
+                    <span
+                      className="mdx-char-front"
+                      style={{
+                        color: isActive ? '#c9a45c' : '#f4f1ea',
+                        transition: 'color 0.25s ease',
+                      }}
+                    >
+                      {char === ' ' ? '\u00A0' : char}
+                    </span>
+                    <span
+                      className="mdx-char-back"
+                      aria-hidden="true"
+                      style={{
+                        color: '#e5c158',
+                      }}
+                    >
+                      {char === ' ' ? '\u00A0' : char}
+                    </span>
+                  </span>
+                ))}
+              </span>
 
-              {/* Refined Metallic Gold Underline with Glow and Scale Animation */}
-              <span
-                className="spark-nav-underline"
-                style={{
-                  position: 'absolute',
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  height: '2px',
-                  background: 'linear-gradient(90deg, #aa8210 0%, #fff0b8 50%, #aa8210 100%)',
-                  borderRadius: 'var(--squircle-capsule, 2px)',
-                  boxShadow: isActive
-                    ? '0 0 8px #c9a45c, 0 0 16px rgba(201, 164, 92, 0.7)'
-                    : 'none',
-                  transform: isActive ? 'scaleX(1)' : 'scaleX(0)',
-                  transformOrigin: 'center',
-                  opacity: isActive ? 1 : 0,
-                  transition: 'transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease',
-                }}
-              />
             </button>
           </li>
         );

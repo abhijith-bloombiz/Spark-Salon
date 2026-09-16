@@ -15,7 +15,7 @@ export default function BrandStatement() {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: 'clamp(70px, 8vw, 120px) 0 clamp(40px, 6vw, 80px)',
+        padding: 'clamp(70px, 7.5vw, 100px) 0',
         backgroundColor: '#040406',
         overflow: 'hidden',
         borderTop: '1px solid rgba(212, 175, 55, 0.15)',
@@ -103,7 +103,7 @@ export default function BrandStatement() {
                 height: '520px',
                 position: 'relative',
                 border: '1px solid rgba(212, 175, 55, 0.35)',
-                boxShadow: '0 25px 70px rgba(0, 0, 0, 0.95), 0 0 35px rgba(212, 175, 55, 0.12)',
+                boxShadow: '0 25px 70px rgba(0, 0, 0, 0.95)',
               }}
               innerStyle={{
                 position: 'relative',
@@ -113,37 +113,50 @@ export default function BrandStatement() {
                 borderRadius: 'inherit',
               }}
             >
-              {/* Full-Bleed High-Fashion Atelier Background Image */}
-              <img
-                src="/images/sections/atelier-creed.jpg"
-                alt="The Spark Atelier Creed"
-                className="creed-bg-image"
-                style={{
-                  position: 'absolute',
-                  inset: 0,
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                  objectPosition: 'center 20%',
-                  zIndex: 0,
-                  transition: 'transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)',
-                }}
-              />
-
-              {/* Luxury Obsidian Gradient Scrim Overlay for optimal contrast & text readability */}
+              {/* Recessed Full-Bleed Atelier Background Plate (clipped to squircle) */}
               <div
+                className="tilt-z-bg"
                 style={{
                   position: 'absolute',
                   inset: 0,
-                  background:
-                    'radial-gradient(ellipse at center, rgba(14, 12, 20, 0.65) 0%, rgba(8, 8, 12, 0.84) 65%, rgba(4, 4, 6, 0.96) 100%)',
-                  zIndex: 1,
+                  borderRadius: 'inherit',
+                  overflow: 'hidden',
                   pointerEvents: 'none',
+                  zIndex: 0,
                 }}
-              />
+              >
+                <img
+                  src="/images/sections/atelier-creed.jpg"
+                  alt="The Spark Atelier Creed"
+                  className="creed-bg-image"
+                  style={{
+                    position: 'absolute',
+                    inset: 0,
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    objectPosition: 'center 20%',
+                    zIndex: 0,
+                    transition: 'transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)',
+                  }}
+                />
 
-              {/* Elegant Gold Orbital Filaments Framing the Card */}
+                {/* Luxury Obsidian Gradient Scrim Overlay for optimal contrast & text readability */}
+                <div
+                  style={{
+                    position: 'absolute',
+                    inset: 0,
+                    background:
+                      'radial-gradient(ellipse at center, rgba(14, 12, 20, 0.65) 0%, rgba(8, 8, 12, 0.84) 65%, rgba(4, 4, 6, 0.96) 100%)',
+                    zIndex: 1,
+                    pointerEvents: 'none',
+                  }}
+                />
+              </div>
+
+              {/* Elegant Gold Orbital Filaments Framing the Card in 3D Space */}
               <svg
+                className="tilt-z-sm"
                 style={{
                   position: 'absolute',
                   inset: 0,
@@ -151,7 +164,7 @@ export default function BrandStatement() {
                   height: '100%',
                   pointerEvents: 'none',
                   zIndex: 2,
-                  opacity: 0.6,
+                  opacity: 0.7,
                 }}
                 viewBox="0 0 520 560"
                 fill="none"
@@ -184,7 +197,7 @@ export default function BrandStatement() {
                 <circle cx="430" cy="90" r="45" stroke="url(#goldFilament)" strokeWidth="1" strokeDasharray="4 6" opacity="0.4" />
               </svg>
 
-              {/* Luxury Obsidian Glass Center with Glowing Gold Emblem */}
+              {/* Luxury Obsidian Glass Center with Floating 3D Gold Emblem & Content */}
               <div
                 style={{
                   position: 'absolute',
@@ -198,7 +211,9 @@ export default function BrandStatement() {
                   zIndex: 3,
                 }}
               >
+                {/* 3D Tier XL: Floating Gold Sparkles Emblem */}
                 <div
+                  className="tilt-z-xl"
                   style={{
                     width: '60px',
                     height: '60px',
@@ -211,46 +226,52 @@ export default function BrandStatement() {
                     color: 'var(--gold-light)',
                     marginBottom: '20px',
                     boxShadow: '0 0 28px rgba(212, 175, 55, 0.3)',
-                    transition: 'transform 0.4s ease',
+                    transition: 'all 0.4s ease',
                   }}
                 >
                   <Sparkles size={26} color="#e5c158" />
                 </div>
 
-                <BlurText
-                  as="h3"
-                  text="The Spark Atelier Creed"
-                  delay={45}
-                  style={{
-                    fontFamily: 'var(--font-serif-display)',
-                    fontSize: '1.35rem',
-                    fontWeight: 700,
-                    letterSpacing: '0.04em',
-                    color: '#ffffff',
-                    marginBottom: '12px',
-                    textTransform: 'uppercase',
-                    textAlign: 'center',
-                  }}
-                />
+                {/* 3D Tier MD: Heading */}
+                <div className="tilt-z-md" style={{ marginBottom: '12px' }}>
+                  <BlurText
+                    as="h3"
+                    text="The Spark Atelier Creed"
+                    delay={45}
+                    style={{
+                      fontFamily: 'var(--font-serif-display)',
+                      fontSize: '1.35rem',
+                      fontWeight: 700,
+                      letterSpacing: '0.04em',
+                      color: '#ffffff',
+                      textTransform: 'uppercase',
+                      textAlign: 'center',
+                    }}
+                  />
+                </div>
 
-                <BlurText
-                  as="p"
-                  delay={20}
-                  text="“Every curve, cut, and touch is an ode to individuality. We do not replicate trends; we sculpt your distinct signature.”"
-                  style={{
-                    fontFamily: 'var(--font-sans-display)',
-                    fontSize: '0.85rem',
-                    lineHeight: 1.7,
-                    color: 'rgba(235, 235, 240, 0.85)',
-                    maxWidth: '340px',
-                    letterSpacing: '0.03em',
-                    fontStyle: 'italic',
-                    textAlign: 'center',
-                  }}
-                />
+                {/* 3D Tier SM: Quote Text */}
+                <div className="tilt-z-sm">
+                  <BlurText
+                    as="p"
+                    delay={20}
+                    text="“Every curve, cut, and touch is an ode to individuality. We do not replicate trends; we sculpt your distinct signature.”"
+                    style={{
+                      fontFamily: 'var(--font-sans-display)',
+                      fontSize: '0.85rem',
+                      lineHeight: 1.7,
+                      color: 'rgba(235, 235, 240, 0.85)',
+                      maxWidth: '340px',
+                      letterSpacing: '0.03em',
+                      fontStyle: 'italic',
+                      textAlign: 'center',
+                    }}
+                  />
+                </div>
 
+                {/* 3D Tier LG: Haute Couture Philosophy Badge */}
                 <div
-                  className="squircle-sm"
+                  className="tilt-z-lg squircle-sm"
                   style={{
                     marginTop: '24px',
                     padding: '8px 18px',
@@ -275,12 +296,6 @@ export default function BrandStatement() {
         </div>
       </div>
 
-      {/* Dynamic Background Image Zoom on Tilt Card Hover */}
-      <style jsx global>{`
-        .creed-tilt-card:hover .creed-bg-image {
-          transform: scale(1.07) !important;
-        }
-      `}</style>
 
       {/* Decorative Bottom-Right Corner Accent */}
       <SectionCornerAccent />

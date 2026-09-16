@@ -191,7 +191,6 @@ const HeroOverlay = forwardRef<HeroOverlayHandle, HeroOverlayProps>(function Her
                     color: '#ffffff',
                     textTransform: 'uppercase',
                     marginBottom: '14px',
-                    textShadow: '0 4px 24px rgba(0, 0, 0, 0.85)',
                   }}
                 />
 
@@ -208,7 +207,6 @@ const HeroOverlay = forwardRef<HeroOverlayHandle, HeroOverlayProps>(function Her
                     lineHeight: 1.65,
                     color: 'rgba(255, 255, 255, 0.88)',
                     maxWidth: '580px',
-                    textShadow: '0 2px 14px rgba(0, 0, 0, 0.9)',
                     margin: 0,
                   }}
                 />

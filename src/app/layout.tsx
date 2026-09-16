@@ -34,6 +34,10 @@ export const metadata: Metadata = {
     locale: 'en_IN',
     type: 'website',
   },
+  icons: {
+    icon: '/favicon.ico',
+    apple: '/images/logo-emblem-crop.png',
+  },
   twitter: {
     card: 'summary_large_image',
     title: SITE_CONFIG.name,
@@ -66,7 +70,6 @@ export default function RootLayout({
           type="image/webp"
           fetchPriority="high"
         />
-        <link rel="preload" as="image" href="/hero/poster.webp" type="image/webp" />
       </head>
       <body className={protoFont.variable}>
         <SquircleSvgDefs />

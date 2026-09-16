@@ -45,7 +45,7 @@ export default function WhySpark() {
       id="why-spark"
       style={{
         position: 'relative',
-        padding: 'clamp(70px, 7.5vw, 95px) 0 45px',
+        padding: 'clamp(70px, 7.5vw, 100px) 0',
         backgroundColor: '#040406',
         overflow: 'hidden',
         borderTop: '1px solid rgba(212, 175, 55, 0.15)',

@@ -319,7 +319,7 @@
     height: auto;
     min-height: auto;
     max-height: none;
-    padding: 60px 0 80px;
+    padding: clamp(70px, 7.5vw, 100px) 0;
     display: block;
   }
 

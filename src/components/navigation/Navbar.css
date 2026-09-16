@@ -1,11 +1,11 @@
 /* Clean Borderless GlassSurface styling */
 .spark-floating-navbar {
   border: none !important;
-  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.24),
-              inset 0 -1px 1px 0 rgba(0, 0, 0, 0.35),
-              inset 0 0 20px 0 rgba(212, 175, 55, 0.04),
-              0 20px 50px -10px rgba(0, 0, 0, 0.8),
-              0 0 20px rgba(212, 175, 55, 0.06) !important;
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.28),
+              inset 0 -1px 1px 0 rgba(0, 0, 0, 0.45),
+              inset 0 0 20px 0 rgba(212, 175, 55, 0.05),
+              0 24px 60px -10px rgba(0, 0, 0, 0.9),
+              0 0 25px rgba(212, 175, 55, 0.1) !important;
 }
 
 .spark-floating-navbar.is-scrolled {
@@ -17,44 +17,55 @@
               0 0 25px rgba(212, 175, 55, 0.1) !important;
 }
 
-/* Remove hamburger menu from desktop */
+/* Floating Navbar Content Container: zero out global padding for pixel-perfect control */
+.spark-floating-navbar .spark-floating-navbar-content {
+  padding: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* Top bar row container: handles edge-to-edge layout and right spacing */
+.spark-top-bar-row {
+  padding-right: 18px;
+}
+
+/* On desktop (> 1040px): hide hamburger button & mobile drawer */
 @media (min-width: 1041px) {
   .spark-menu-wrapper {
     display: none !important;
   }
-  .spark-floating-navbar .spark-floating-navbar-content {
-    padding-right: 22px !important;
+  .spark-mobile-expanded-drawer {
+    display: none !important;
   }
 }
 
+/* On mobile / tablet (<= 1040px): hide desktop links, search, divider, booking CTA; display hamburger box */
 @media (max-width: 1040px) {
-  .spark-desktop-nav-links {
-    display: none !important;
-  }
-}
-
-@media (max-width: 640px) {
+  .spark-desktop-nav-links,
   .spark-search-wrapper,
-  .spark-nav-divider {
+  .spark-nav-divider,
+  .spark-booking-wrapper {
     display: none !important;
+  }
+  .spark-top-bar-row {
+    padding-right: 14px;
+  }
+  .spark-logo-panel {
+    padding-left: 14px !important;
+  }
+  .spark-menu-wrapper {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+  }
+  .spark-menu-btn {
+    border-radius: 8px !important;
   }
 }
 
-.spark-booking-text-short {
-  display: none !important;
-}
-
+/* Mobile fine-tuning (<= 440px) for razor-sharp edge symmetry */
 @media (max-width: 440px) {
-  .spark-booking-text-full {
-    display: none !important;
-  }
-  .spark-booking-text-short {
-    display: inline !important;
-  }
-  .spark-booking-btn {
-    padding: 0 12px !important;
-    height: 34px !important;
-    gap: 5px !important;
+  .spark-top-bar-row {
+    padding-right: 10px;
   }
   .spark-logo-panel {
     padding-left: 10px !important;
@@ -63,9 +74,107 @@
   .spark-logo-subtext {
     display: none !important;
   }
-  .spark-floating-navbar {
+  .spark-menu-btn {
+    border-radius: 7.5px !important;
+  }
+  .spark-floating-navbar:not(.is-expanded) {
     height: 58px !important;
     border-radius: 18px !important;
+  }
+}
+
+/* Expanded Glass Container Styling */
+.spark-floating-navbar.is-expanded {
+  height: 440px !important;
+  border-radius: 22px !important;
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.35),
+              inset 0 -1px 1px 0 rgba(0, 0, 0, 0.5),
+              inset 0 0 25px 0 rgba(212, 175, 55, 0.08),
+              0 24px 60px -10px rgba(0, 0, 0, 0.95),
+              0 0 35px rgba(212, 175, 55, 0.16) !important;
+}
+
+.spark-floating-navbar {
+  transition: height 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              border-radius 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.38s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.38s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.spark-menu-wrapper {
+  pointer-events: auto !important;
+  position: relative !important;
+  z-index: 20 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spark-menu-btn {
+  pointer-events: auto !important;
+  cursor: pointer !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.spark-menu-btn:active {
+  transform: scale(0.92) !important;
+}
+
+.spark-menu-btn.is-open {
+  background: rgba(201, 164, 92, 0.14) !important;
+  border-color: rgba(229, 193, 88, 0.95) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), 0 0 16px rgba(201, 164, 92, 0.5) !important;
+}
+
+/* Expanded Drawer Nav Items: List View with Reduced 8px Radius */
+.spark-mobile-glass-nav-item {
+  border-radius: 8px !important;
+  width: 100% !important;
+}
+
+.spark-mobile-glass-nav-item:hover,
+.spark-mobile-glass-nav-item:focus-visible {
+  background: rgba(201, 164, 92, 0.15) !important;
+  border-color: rgba(201, 164, 92, 0.55) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35), 0 0 12px rgba(201, 164, 92, 0.25) !important;
+  transform: translateX(4px);
+}
+
+.spark-mobile-glass-nav-item:hover .spark-nav-item-arrow,
+.spark-mobile-glass-nav-item:focus-visible .spark-nav-item-arrow {
+  color: #e5c158 !important;
+  transform: translateX(3px);
+}
+
+.spark-mobile-glass-nav-item:active {
+  transform: scale(0.98);
+}
+
+.spark-drawer-grid {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 6.5px !important;
+  padding: 12px 16px 10px !important;
+}
+
+.spark-drawer-cta {
+  padding: 0 16px 14px !important;
+}
+
+@media (max-width: 440px) {
+  .spark-floating-navbar.is-expanded {
+    height: 430px !important;
+  }
+  .spark-drawer-grid {
+    padding: 10px 10px 8px !important;
+    gap: 6px !important;
+  }
+  .spark-drawer-cta {
+    padding: 0 10px 12px !important;
   }
 }
 
@@ -77,15 +186,30 @@
   box-shadow: none !important;
 }
 
-.spark-nav-link:hover {
-  color: #c9a45c !important;
-  transform: translateY(-1px) !important;
+/* HorizonX Signature Rolling Character Flip Effect */
+.mdx-link-content {
+  line-height: inherit;
+  display: inline-block;
+  pointer-events: none;
 }
 
-.spark-nav-link:hover .spark-nav-underline {
-  transform: scaleX(1) !important;
-  opacity: 1 !important;
-  box-shadow: 0 0 8px #c9a45c, 0 0 16px rgba(201, 164, 92, 0.6) !important;
+.mdx-link-char-mask {
+  vertical-align: top;
+  line-height: inherit;
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+}
+
+.mdx-char-front {
+  display: block;
+}
+
+.mdx-char-back {
+  display: block;
+  position: absolute;
+  top: 100%;
+  left: 0;
 }
 
 .spark-search-btn:hover {
