@@ -51,9 +51,9 @@ export default function SparkExperience() {
       style={{
         position: 'relative',
         padding: 'clamp(70px, 7.5vw, 100px) 0',
-        backgroundColor: '#040406',
+        backgroundColor: '#ffffff',
         overflow: 'hidden',
-        borderTop: '1px solid rgba(212, 175, 55, 0.15)',
+        borderTop: '1px solid rgba(212, 175, 55, 0.25)',
       }}
     >
       <div className="luxury-container" style={{ position: 'relative', zIndex: 2 }}>
@@ -72,6 +72,7 @@ export default function SparkExperience() {
             as="h2"
             text={'THE\nSPARK\nEXPERIENCE'}
             highlightWords={['SPARK']}
+            highlightStyle={{ color: '#9e781e' }}
             delay={90}
             direction="top"
             style={{
@@ -81,7 +82,7 @@ export default function SparkExperience() {
               lineHeight: 1.05,
               letterSpacing: '0.04em',
               textTransform: 'uppercase',
-              color: '#ffffff',
+              color: '#0d0c12',
             }}
           />
 
@@ -95,7 +96,7 @@ export default function SparkExperience() {
               fontSize: '0.78rem',
               fontWeight: 700,
               letterSpacing: '0.24em',
-              color: 'var(--gold-primary)',
+              color: '#9e781e',
               textTransform: 'uppercase',
               textAlign: 'right',
               marginBottom: '6px',
@@ -123,7 +124,7 @@ export default function SparkExperience() {
                   innerClassName="squircle"
                   edgeSensitivity={32}
                   glowColor="43 75 65"
-                  backgroundColor="rgba(14, 13, 20, 0.95)"
+                  backgroundColor="#000000"
                   borderRadius={22}
                   glowRadius={40}
                   glowIntensity={1.2}
@@ -132,6 +133,7 @@ export default function SparkExperience() {
                   style={{
                     minHeight: 'clamp(360px, 46vh, 450px)',
                     height: '100%',
+                    backgroundColor: '#000000',
                     cursor: 'pointer',
                     transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
                   }}
@@ -187,7 +189,7 @@ export default function SparkExperience() {
                       position: 'absolute',
                       inset: 0,
                       background:
-                        'linear-gradient(180deg, rgba(8, 7, 12, 0.4) 0%, rgba(8, 7, 12, 0.68) 40%, rgba(6, 6, 9, 0.92) 75%, rgba(4, 4, 6, 0.98) 100%)',
+                        'linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.72) 40%, rgba(0, 0, 0, 0.94) 75%, #000000 100%)',
                       zIndex: 1,
                       pointerEvents: 'none',
                     }}
@@ -324,7 +326,7 @@ export default function SparkExperience() {
                 fontFamily: 'var(--font-sans-display)',
                 fontSize: '0.78rem',
                 letterSpacing: '0.3em',
-                color: 'var(--text-muted)',
+                color: '#444052',
                 textTransform: 'uppercase',
                 marginBottom: '16px',
               }}

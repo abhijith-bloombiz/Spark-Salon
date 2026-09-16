@@ -16,9 +16,9 @@ export default function BrandStatement() {
         alignItems: 'center',
         justifyContent: 'center',
         padding: 'clamp(70px, 7.5vw, 100px) 0',
-        backgroundColor: '#040406',
+        backgroundColor: '#ffffff',
         overflow: 'hidden',
-        borderTop: '1px solid rgba(212, 175, 55, 0.15)',
+        borderTop: '1px solid rgba(212, 175, 55, 0.25)',
       }}
     >
       <div className="luxury-container" style={{ position: 'relative', zIndex: 2 }}>
@@ -41,14 +41,14 @@ export default function BrandStatement() {
                   marginBottom: '20px',
                 }}
               >
-                <span style={{ width: '28px', height: '1px', backgroundColor: 'var(--gold-primary)' }} />
+                <span style={{ width: '28px', height: '1.5px', backgroundColor: '#9e781e' }} />
                 <span
                   style={{
                     fontFamily: 'var(--font-sans-display)',
                     fontSize: '0.74rem',
                     fontWeight: 700,
                     letterSpacing: '0.24em',
-                    color: 'var(--gold-primary)',
+                    color: '#9e781e',
                     textTransform: 'uppercase',
                   }}
                 >
@@ -60,7 +60,7 @@ export default function BrandStatement() {
                 as="h2"
                 text={"BEAUTY\nIS NOT\nA LOOK.\nIT'S A\nSIGNATURE."}
                 highlightWords={["IT'S", "A"]}
-                highlightStyle={{ color: 'var(--gold-light)' }}
+                highlightStyle={{ color: '#9e781e' }}
                 delay={80}
                 direction="top"
                 style={{
@@ -70,7 +70,7 @@ export default function BrandStatement() {
                   lineHeight: 1.04,
                   letterSpacing: '0.04em',
                   textTransform: 'uppercase',
-                  color: '#ffffff',
+                  color: '#0d0c12',
                   marginBottom: '24px',
                 }}
               />
@@ -83,7 +83,7 @@ export default function BrandStatement() {
                   fontFamily: 'var(--font-sans-display)',
                   fontSize: '0.92rem',
                   lineHeight: 1.8,
-                  color: 'var(--text-muted)',
+                  color: '#444052',
                   maxWidth: '440px',
                 }}
               />
@@ -103,7 +103,6 @@ export default function BrandStatement() {
                 height: '520px',
                 position: 'relative',
                 border: '1px solid rgba(212, 175, 55, 0.35)',
-                boxShadow: '0 25px 70px rgba(0, 0, 0, 0.95)',
               }}
               innerStyle={{
                 position: 'relative',
@@ -147,7 +146,7 @@ export default function BrandStatement() {
                     position: 'absolute',
                     inset: 0,
                     background:
-                      'radial-gradient(ellipse at center, rgba(14, 12, 20, 0.65) 0%, rgba(8, 8, 12, 0.84) 65%, rgba(4, 4, 6, 0.96) 100%)',
+                      'radial-gradient(ellipse at center, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.88) 65%, #000000 100%)',
                     zIndex: 1,
                     pointerEvents: 'none',
                   }}

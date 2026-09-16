@@ -62,9 +62,9 @@ export default function Testimonials() {
       style={{
         position: 'relative',
         padding: 'clamp(70px, 7.5vw, 100px) 0',
-        backgroundColor: '#040406',
+        backgroundColor: '#ffffff',
         overflow: 'hidden',
-        borderTop: '1px solid rgba(212, 175, 55, 0.15)',
+        borderTop: '1px solid rgba(212, 175, 55, 0.25)',
       }}
     >
       <div className="luxury-container" style={{ position: 'relative', zIndex: 2, margin: '0 auto', width: '100%' }}>
@@ -87,7 +87,7 @@ export default function Testimonials() {
                     fontSize: '0.74rem',
                     fontWeight: 700,
                     letterSpacing: '0.24em',
-                    color: 'var(--gold-primary)',
+                    color: '#9e781e',
                     textTransform: 'uppercase',
                     marginBottom: '14px',
                     display: 'flex',
@@ -95,7 +95,7 @@ export default function Testimonials() {
                     gap: '10px',
                   }}
                 >
-                  <span style={{ width: '24px', height: '1px', backgroundColor: 'var(--gold-primary)' }} />
+                  <span style={{ width: '24px', height: '1.5px', backgroundColor: '#9e781e' }} />
                   <BlurText as="span" text="CLIENT ACCLAIM" delay={25} />
                 </div>
 
@@ -103,6 +103,7 @@ export default function Testimonials() {
                   as="h2"
                   text={'HEAR\nFROM OUR\nCLIENTS.'}
                   highlightWords={['CLIENTS']}
+                  highlightStyle={{ color: '#9e781e' }}
                   delay={100}
                   direction="top"
                   style={{
@@ -112,7 +113,7 @@ export default function Testimonials() {
                     lineHeight: 1.04,
                     letterSpacing: '0.04em',
                     textTransform: 'uppercase',
-                    color: '#ffffff',
+                    color: '#0d0c12',
                     marginBottom: '26px',
                   }}
                 />
@@ -132,7 +133,7 @@ export default function Testimonials() {
                           fontFamily: 'var(--font-serif-display)',
                           fontSize: 'clamp(1.1rem, 1.8vw, 1.32rem)',
                           lineHeight: 1.62,
-                          color: '#ffffff',
+                          color: '#1a1824',
                           fontStyle: 'italic',
                           marginBottom: '20px',
                         }}
@@ -147,9 +148,9 @@ export default function Testimonials() {
                             position: 'relative',
                             width: '54px',
                             height: '54px',
-                            border: '1.5px solid var(--gold-primary)',
+                            border: '1.5px solid #b88e28',
                             overflow: 'hidden',
-                            boxShadow: '0 4px 18px rgba(212, 175, 55, 0.35)',
+                            boxShadow: '0 4px 18px rgba(212, 175, 55, 0.25)',
                             backgroundColor: 'rgba(212, 175, 55, 0.15)',
                             flexShrink: 0,
                           }}
@@ -174,7 +175,7 @@ export default function Testimonials() {
                               fontSize: '0.92rem',
                               fontWeight: 800,
                               letterSpacing: '0.08em',
-                              color: '#ffffff',
+                              color: '#0d0c12',
                               display: 'flex',
                               alignItems: 'center',
                               gap: '8px',
@@ -192,7 +193,7 @@ export default function Testimonials() {
                                 fontFamily: 'var(--font-sans-display)',
                                 fontSize: '0.58rem',
                                 letterSpacing: '0.12em',
-                                color: 'var(--gold-primary)',
+                                color: '#9e781e',
                                 textTransform: 'uppercase',
                                 fontWeight: 700,
                               }}
@@ -205,7 +206,7 @@ export default function Testimonials() {
                               fontFamily: 'var(--font-sans-display)',
                               fontSize: '0.74rem',
                               letterSpacing: '0.1em',
-                              color: 'var(--gold-light)',
+                              color: '#9e781e',
                               textTransform: 'uppercase',
                               marginTop: '3px',
                             }}
@@ -261,15 +262,15 @@ export default function Testimonials() {
                             position: 'relative',
                             width: '38px',
                             height: '38px',
-                            border: isActive ? '2px solid var(--gold-primary)' : '1px solid rgba(255, 255, 255, 0.22)',
+                            border: isActive ? '2px solid var(--gold-primary)' : '1px solid rgba(0, 0, 0, 0.15)',
                             padding: 0,
                             overflow: 'hidden',
                             cursor: 'pointer',
                             opacity: isActive ? 1 : 0.45,
                             transform: isActive ? 'scale(1.12)' : 'scale(1)',
                             transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
-                            boxShadow: isActive ? '0 0 16px rgba(212, 175, 55, 0.7), 0 4px 12px rgba(0,0,0,0.8)' : 'none',
-                            backgroundColor: '#0c0c10',
+                            boxShadow: isActive ? '0 0 12px rgba(212, 175, 55, 0.5), 0 3px 8px rgba(0, 0, 0, 0.15)' : 'none',
+                            backgroundColor: '#000000',
                           }}
                         >
                           <img
@@ -410,8 +411,8 @@ export default function Testimonials() {
                         style={{
                           padding: '10px 8px',
                           textAlign: 'center',
-                          background: 'rgba(255, 255, 255, 0.03)',
-                          border: '1px solid rgba(212, 175, 55, 0.18)',
+                          background: '#000000',
+                          border: '1px solid rgba(212, 175, 55, 0.28)',
                         }}
                       >
                         <div

@@ -128,9 +128,9 @@ export default function ServicesExplorer({ onOpenBooking }: ServicesExplorerProp
         alignItems: 'center',
         justifyContent: 'center',
         padding: 'clamp(70px, 7.5vw, 100px) 0',
-        backgroundColor: '#040406',
+        backgroundColor: '#ffffff',
         overflow: 'hidden',
-        borderTop: '1px solid rgba(212, 175, 55, 0.15)',
+        borderTop: '1px solid rgba(212, 175, 55, 0.25)',
       }}
     >
       <div className="luxury-container" style={{ position: 'relative', zIndex: 2 }}>
@@ -164,14 +164,14 @@ export default function ServicesExplorer({ onOpenBooking }: ServicesExplorerProp
                     marginBottom: '16px',
                   }}
                 >
-                  <span style={{ width: '28px', height: '1px', backgroundColor: 'var(--gold-primary)' }} />
+                  <span style={{ width: '28px', height: '1.5px', backgroundColor: '#9e781e' }} />
                   <span
                     style={{
                       fontFamily: 'var(--font-sans-display)',
                       fontSize: '0.74rem',
                       fontWeight: 700,
                       letterSpacing: '0.24em',
-                      color: 'var(--gold-primary)',
+                      color: '#9e781e',
                       textTransform: 'uppercase',
                     }}
                   >
@@ -183,6 +183,7 @@ export default function ServicesExplorer({ onOpenBooking }: ServicesExplorerProp
                   as="h2"
                   text={'YOUR\nSIGNATURE\nSERVICES.'}
                   highlightWords={['SIGNATURE']}
+                  highlightStyle={{ color: '#9e781e' }}
                   delay={80}
                   direction="top"
                   style={{
@@ -192,7 +193,7 @@ export default function ServicesExplorer({ onOpenBooking }: ServicesExplorerProp
                     lineHeight: 1.05,
                     letterSpacing: '0.04em',
                     textTransform: 'uppercase',
-                    color: '#ffffff',
+                    color: '#0d0c12',
                     marginBottom: '26px',
                   }}
                 />
@@ -216,31 +217,31 @@ export default function ServicesExplorer({ onOpenBooking }: ServicesExplorerProp
                           justifyContent: 'space-between',
                           padding: '13px 18px',
                           border: isActive
-                            ? '1px solid var(--gold-primary)'
-                            : '1px solid rgba(255, 255, 255, 0.08)',
+                            ? '1px solid #d4af37'
+                            : '1px solid rgba(0, 0, 0, 0.08)',
                           background: isActive
-                            ? 'linear-gradient(90deg, rgba(212, 175, 55, 0.25) 0%, rgba(212, 175, 55, 0.08) 100%)'
-                            : 'rgba(14, 13, 20, 0.94)',
-                          color: isActive ? 'var(--gold-light)' : 'var(--text-muted)',
+                            ? '#000000'
+                            : '#f8f7fa',
+                          color: isActive ? '#ffffff' : '#3e3a4b',
                           cursor: 'pointer',
                           transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
-                          boxShadow: isActive ? '0 4px 20px rgba(212, 175, 55, 0.25)' : 'none',
+                          boxShadow: isActive ? '0 6px 20px rgba(0, 0, 0, 0.22), 0 0 12px rgba(212, 175, 55, 0.35)' : 'none',
                           position: 'relative',
                           overflow: 'hidden',
                           outline: 'none',
                         }}
                         onMouseEnter={(e) => {
                           if (!isActive) {
-                            e.currentTarget.style.borderColor = 'rgba(212, 175, 55, 0.4)';
-                            e.currentTarget.style.background = 'rgba(212, 175, 55, 0.08)';
-                            e.currentTarget.style.color = '#ffffff';
+                            e.currentTarget.style.borderColor = 'rgba(212, 175, 55, 0.5)';
+                            e.currentTarget.style.background = '#f0edf4';
+                            e.currentTarget.style.color = '#0d0c12';
                           }
                         }}
                         onMouseLeave={(e) => {
                           if (!isActive) {
-                            e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.08)';
-                            e.currentTarget.style.background = 'rgba(12, 11, 18, 0.65)';
-                            e.currentTarget.style.color = 'var(--text-muted)';
+                            e.currentTarget.style.borderColor = 'rgba(0, 0, 0, 0.08)';
+                            e.currentTarget.style.background = '#f8f7fa';
+                            e.currentTarget.style.color = '#3e3a4b';
                           }
                         }}
                       >
@@ -251,7 +252,7 @@ export default function ServicesExplorer({ onOpenBooking }: ServicesExplorerProp
                               fontSize: '0.78rem',
                               fontWeight: 700,
                               letterSpacing: '0.15em',
-                              color: isActive ? 'var(--gold-light)' : 'var(--gold-primary)',
+                              color: isActive ? '#d4af37' : '#9e781e',
                             }}
                           >
                             {cat.num}
@@ -263,7 +264,7 @@ export default function ServicesExplorer({ onOpenBooking }: ServicesExplorerProp
                               fontWeight: 800,
                               letterSpacing: '0.18em',
                               textTransform: 'uppercase',
-                              color: isActive ? '#ffffff' : 'inherit',
+                              color: isActive ? '#ffffff' : '#3e3a4b',
                             }}
                           >
                             {cat.name}
@@ -273,7 +274,7 @@ export default function ServicesExplorer({ onOpenBooking }: ServicesExplorerProp
                         <ArrowRight
                           className="services-cat-arrow"
                           size={14}
-                          color={isActive ? 'var(--gold-light)' : 'var(--text-dim)'}
+                          color={isActive ? '#d4af37' : '#767684'}
                           style={{
                             transform: isActive ? 'translateX(4px)' : 'none',
                             transition: 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
@@ -298,8 +299,9 @@ export default function ServicesExplorer({ onOpenBooking }: ServicesExplorerProp
                 height: '100%',
                 minHeight: '520px',
                 overflow: 'hidden',
+                backgroundColor: '#000000',
                 border: '1px solid rgba(212, 175, 55, 0.35)',
-                boxShadow: '0 25px 70px rgba(0, 0, 0, 0.95), var(--gold-glow)',
+                boxShadow: '0 12px 32px rgba(0, 0, 0, 0.14), 0 2px 6px rgba(0, 0, 0, 0.06)',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
@@ -337,7 +339,7 @@ export default function ServicesExplorer({ onOpenBooking }: ServicesExplorerProp
                   position: 'absolute',
                   inset: 0,
                   background:
-                    'linear-gradient(180deg, rgba(8, 7, 14, 0.6) 0%, rgba(6, 6, 10, 0.84) 45%, rgba(4, 4, 6, 0.98) 100%)',
+                    'linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.8) 45%, #000000 100%)',
                   zIndex: 1,
                   pointerEvents: 'none',
                 }}

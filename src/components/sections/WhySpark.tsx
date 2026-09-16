@@ -46,9 +46,9 @@ export default function WhySpark() {
       style={{
         position: 'relative',
         padding: 'clamp(70px, 7.5vw, 100px) 0',
-        backgroundColor: '#040406',
+        backgroundColor: '#ffffff',
         overflow: 'hidden',
-        borderTop: '1px solid rgba(212, 175, 55, 0.15)',
+        borderTop: '1px solid rgba(212, 175, 55, 0.25)',
       }}
     >
       <div className="luxury-container" style={{ position: 'relative', zIndex: 2, margin: '0 auto', width: '100%' }}>
@@ -59,7 +59,7 @@ export default function WhySpark() {
             fontSize: '0.74rem',
             fontWeight: 700,
             letterSpacing: '0.24em',
-            color: 'var(--gold-primary)',
+            color: '#9e781e',
             textTransform: 'uppercase',
             marginBottom: '14px',
             display: 'flex',
@@ -67,7 +67,7 @@ export default function WhySpark() {
             gap: '10px',
           }}
         >
-          <span style={{ width: '24px', height: '1px', backgroundColor: 'var(--gold-primary)' }} />
+          <span style={{ width: '24px', height: '1.5px', backgroundColor: '#9e781e' }} />
           <BlurText as="span" text="THE ATELIER PHILOSOPHY" delay={25} />
         </div>
 
@@ -76,6 +76,7 @@ export default function WhySpark() {
           as="h2"
           text={'WHY\nSPARK?'}
           highlightWords={['SPARK']}
+          highlightStyle={{ color: '#9e781e' }}
           delay={120}
           direction="top"
           style={{
@@ -85,7 +86,7 @@ export default function WhySpark() {
             lineHeight: 1.02,
             letterSpacing: '0.04em',
             textTransform: 'uppercase',
-            color: '#ffffff',
+            color: '#0d0c12',
             marginBottom: '44px',
           }}
         />
@@ -119,7 +120,7 @@ export default function WhySpark() {
                       position: 'absolute',
                       inset: 0,
                       background:
-                        'linear-gradient(180deg, rgba(8, 8, 14, 0.45) 0%, rgba(8, 8, 14, 0.68) 45%, rgba(4, 4, 7, 0.95) 100%)',
+                        'linear-gradient(180deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.72) 45%, #000000 100%)',
                       zIndex: 1,
                       pointerEvents: 'none',
                     }}
@@ -242,22 +243,22 @@ export default function WhySpark() {
               alignItems: 'center',
               flexWrap: 'wrap',
               gap: '16px',
-              borderTop: '1px solid rgba(212, 175, 55, 0.2)',
+              borderTop: '1px solid rgba(0, 0, 0, 0.08)',
               paddingTop: '18px',
-              color: 'var(--text-muted)',
+              color: '#555162',
               fontFamily: 'var(--font-sans-display)',
               fontSize: '0.76rem',
               letterSpacing: '0.14em',
             }}
           >
-            <div style={{ fontWeight: 800, color: 'var(--gold-primary)', fontSize: '0.85rem' }}>
+            <div style={{ fontWeight: 800, color: '#9e781e', fontSize: '0.85rem' }}>
               06
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '20px', flexWrap: 'wrap' }}>
               <span
                 style={{
-                  color: 'var(--gold-light)',
+                  color: '#9e781e',
                   textTransform: 'uppercase',
                   letterSpacing: '0.18em',
                   fontSize: '0.7rem',

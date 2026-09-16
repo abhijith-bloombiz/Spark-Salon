@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { Play, MapPin, Clock, X, Sparkles, Layers, Compass, Eye } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { BlurText, ScrollCard, ModernTiltCard, TiltItem, SectionCornerAccent } from '@/components/ui';
+import { BlurText, ScrollCard, ModernTiltCard, SectionCornerAccent } from '@/components/ui';
 
 export default function VirtualTour() {
   const [isPlayingTour, setIsPlayingTour] = useState(false);
@@ -46,9 +46,9 @@ export default function VirtualTour() {
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: 'clamp(70px, 7.5vw, 100px) 0',
-        backgroundColor: '#040406',
+        backgroundColor: '#ffffff',
         overflow: 'hidden',
-        borderTop: '1px solid rgba(212, 175, 55, 0.15)',
+        borderTop: '1px solid rgba(212, 175, 55, 0.25)',
       }}
     >
       {/* Main Content Area */}
@@ -72,7 +72,7 @@ export default function VirtualTour() {
                   fontSize: '0.74rem',
                   fontWeight: 700,
                   letterSpacing: '0.24em',
-                  color: 'var(--gold-primary)',
+                  color: '#9e781e',
                   textTransform: 'uppercase',
                   marginBottom: '14px',
                   display: 'flex',
@@ -80,7 +80,7 @@ export default function VirtualTour() {
                   gap: '10px',
                 }}
               >
-                <span style={{ width: '24px', height: '1px', backgroundColor: 'var(--gold-primary)' }} />
+                <span style={{ width: '24px', height: '1.5px', backgroundColor: '#9e781e' }} />
                 <BlurText as="span" text="THE SALON ARCHITECTURE" delay={25} />
               </div>
 
@@ -88,6 +88,7 @@ export default function VirtualTour() {
                 as="h2"
                 text={'STEP INTO\nSPARK.'}
                 highlightWords={['SPARK']}
+                highlightStyle={{ color: '#9e781e' }}
                 delay={100}
                 direction="top"
                 style={{
@@ -97,7 +98,7 @@ export default function VirtualTour() {
                   lineHeight: 1.02,
                   letterSpacing: '0.04em',
                   textTransform: 'uppercase',
-                  color: '#ffffff',
+                  color: '#0d0c12',
                   marginBottom: '14px',
                 }}
               />
@@ -111,7 +112,7 @@ export default function VirtualTour() {
                   fontSize: '0.84rem',
                   fontWeight: 700,
                   letterSpacing: '0.2em',
-                  color: 'var(--gold-light)',
+                  color: '#9e781e',
                   textTransform: 'uppercase',
                   marginBottom: '26px',
                 }}
@@ -138,8 +139,8 @@ export default function VirtualTour() {
                       className="squircle-sm"
                       style={{
                         padding: '11px 12px',
-                        background: 'linear-gradient(145deg, rgba(16, 15, 24, 0.75) 0%, rgba(8, 8, 12, 0.88) 100%)',
-                        border: '1px solid rgba(212, 175, 55, 0.2)',
+                        background: '#f8f7fa',
+                        border: '1px solid rgba(212, 175, 55, 0.3)',
                         display: 'flex',
                         flexDirection: 'column',
                         gap: '3px',
@@ -152,22 +153,22 @@ export default function VirtualTour() {
                             fontFamily: 'var(--font-serif-display)',
                             fontSize: '1rem',
                             fontWeight: 800,
-                            color: '#ffffff',
+                            color: '#0d0c12',
                             letterSpacing: '0.02em',
                           }}
                         >
                           {spec.value}{' '}
-                          <span style={{ fontSize: '0.6rem', color: 'var(--gold-primary)', fontFamily: 'var(--font-sans-display)' }}>
+                          <span style={{ fontSize: '0.6rem', color: '#9e781e', fontFamily: 'var(--font-sans-display)' }}>
                             {spec.unit}
                           </span>
                         </span>
-                        <IconComp size={13} color="#d4af37" style={{ opacity: 0.85 }} />
+                        <IconComp size={13} color="#9e781e" style={{ opacity: 0.85 }} />
                       </div>
                       <span
                         style={{
                           fontFamily: 'var(--font-sans-display)',
                           fontSize: '0.64rem',
-                          color: 'var(--text-muted)',
+                          color: '#555162',
                           letterSpacing: '0.06em',
                           textTransform: 'uppercase',
                         }}
@@ -323,8 +324,8 @@ export default function VirtualTour() {
                       style={{
                         padding: '10px 15px',
                         background: isActive
-                          ? 'linear-gradient(90deg, rgba(212, 175, 55, 0.18) 0%, rgba(212, 175, 55, 0.04) 100%)'
-                          : 'rgba(255, 255, 255, 0.02)',
+                          ? 'linear-gradient(90deg, rgba(212, 175, 55, 0.22) 0%, rgba(212, 175, 55, 0.06) 100%)'
+                          : '#000000',
                         border: isActive ? '1px solid var(--gold-primary)' : '1px solid rgba(212, 175, 55, 0.12)',
                         boxShadow: isActive ? 'inset 3px 0 0 var(--gold-primary), 0 4px 16px rgba(0, 0, 0, 0.4)' : 'none',
                         cursor: 'pointer',
@@ -473,26 +474,26 @@ export default function VirtualTour() {
               alignItems: 'center',
               flexWrap: 'wrap',
               gap: '16px',
-              borderTop: '1px solid rgba(212, 175, 55, 0.22)',
+              borderTop: '1px solid rgba(0, 0, 0, 0.08)',
               paddingTop: '18px',
-              color: 'var(--text-muted)',
+              color: '#555162',
               fontFamily: 'var(--font-sans-display)',
               fontSize: '0.76rem',
               letterSpacing: '0.14em',
             }}
           >
-            <div style={{ fontWeight: 800, color: 'var(--gold-primary)', fontSize: '0.85rem' }}>
+            <div style={{ fontWeight: 800, color: '#9e781e', fontSize: '0.85rem' }}>
               07
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '28px', flexWrap: 'wrap' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <MapPin size={14} color="#e5c158" />
+                <MapPin size={14} color="#9e781e" />
                 <span>Mavoor Rd, Kottooli, Kozhikode, Kerala 673016</span>
               </div>
 
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <Clock size={14} color="#e5c158" />
+                <Clock size={14} color="#9e781e" />
                 <span>Mon - Sun | 09:00 AM - 09:00 PM</span>
               </div>
             </div>
@@ -524,12 +525,12 @@ export default function VirtualTour() {
               position: 'relative',
               width: '100%',
               maxWidth: '960px',
-              aspectRatio: '16/9',
-              backgroundColor: '#0c0c12',
+              aspectRatio: '16 / 9',
+              backgroundColor: '#000000',
               borderRadius: 'var(--squircle-xl, 26px)',
               border: '1px solid var(--gold-primary)',
               overflow: 'hidden',
-              boxShadow: '0 25px 80px rgba(0,0,0,0.9), var(--gold-glow)',
+              boxShadow: '0 30px 90px rgba(0,0,0,0.95), var(--gold-glow)',
             }}
             onClick={(e) => e.stopPropagation()}
           >

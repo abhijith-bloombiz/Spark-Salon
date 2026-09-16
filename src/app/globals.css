@@ -615,9 +615,9 @@ h1, h2, h3, h4, h5, h6, p, span, a, button, input, textarea, select {
   height: 100%;
   min-height: 410px;
   border-radius: var(--squircle-xl, 24px);
-  background: linear-gradient(165deg, rgba(16, 15, 24, 0.88) 0%, rgba(7, 7, 12, 0.96) 100%);
+  background: #000000;
   border: 1px solid rgba(212, 175, 55, 0.25);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.14), 0 2px 6px rgba(0, 0, 0, 0.06);
   overflow: hidden;
   padding: 30px 24px;
   display: flex;
@@ -632,7 +632,7 @@ h1, h2, h3, h4, h5, h6, p, span, a, button, input, textarea, select {
 .why-spark-card:hover {
   transform: translateY(-8px) !important;
   border-color: var(--gold-primary) !important;
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95), 0 0 35px rgba(212, 175, 55, 0.28) !important;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.22), 0 0 20px rgba(212, 175, 55, 0.2) !important;
 }
 
 .why-spark-card .why-spark-bg-img {

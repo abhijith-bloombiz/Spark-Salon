@@ -26,9 +26,9 @@ export default function FinalCta() {
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: 'clamp(70px, 7.5vw, 100px) 0',
-        backgroundColor: '#040406',
+        backgroundColor: '#ffffff',
         overflow: 'hidden',
-        borderTop: '1px solid rgba(212, 175, 55, 0.15)',
+        borderTop: '1px solid rgba(212, 175, 55, 0.25)',
       }}
     >
       {/* Main Content Grid */}
@@ -151,6 +151,7 @@ export default function FinalCta() {
                 as="h2"
                 text={'READY TO\nSPARK?'}
                 highlightWords={['SPARK']}
+                highlightStyle={{ color: '#9e781e' }}
                 delay={120}
                 direction="top"
                 style={{
@@ -160,7 +161,7 @@ export default function FinalCta() {
                   lineHeight: 1.05,
                   letterSpacing: '0.04em',
                   textTransform: 'uppercase',
-                  color: '#ffffff',
+                  color: '#0d0c12',
                   marginBottom: '16px',
                 }}
               />
@@ -172,7 +173,7 @@ export default function FinalCta() {
                 style={{
                   fontFamily: 'var(--font-sans-display)',
                   fontSize: '1rem',
-                  color: 'var(--text-muted)',
+                  color: '#444052',
                   letterSpacing: '0.12em',
                   marginBottom: '36px',
                 }}
@@ -209,15 +210,15 @@ export default function FinalCta() {
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
-            borderTop: '1px solid rgba(212, 175, 55, 0.15)',
+            borderTop: '1px solid rgba(0, 0, 0, 0.08)',
             paddingTop: '20px',
-            color: 'var(--text-dim)',
+            color: '#6e6a7c',
             fontFamily: 'var(--font-sans-display)',
             fontSize: '0.75rem',
             letterSpacing: '0.15em',
           }}
         >
-          <div style={{ color: 'var(--gold-primary)', fontWeight: 800 }}>
+          <div style={{ color: '#9e781e', fontWeight: 800 }}>
             09
           </div>
 

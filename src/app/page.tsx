@@ -67,29 +67,32 @@ export default function HomePage() {
         }}
       />
 
-      {/* 03 — BRAND STATEMENT (matching scroll effect.png) */}
-      <BrandStatement />
+      {/* INTERMEDIATE SECTIONS CONTAINER — LUXURY WHITE CANVAS */}
+      <div style={{ backgroundColor: '#ffffff', position: 'relative', zIndex: 1 }}>
+        {/* 03 — BRAND STATEMENT (matching scroll effect.png) */}
+        <BrandStatement />
 
-      {/* 04 — THE SPARK EXPERIENCE (matching 3d cards.png) */}
-      <SparkExperience />
+        {/* 04 — THE SPARK EXPERIENCE (matching 3d cards.png) */}
+        <SparkExperience />
 
-      {/* 05 — SERVICES (matching services.png) */}
-      <ServicesExplorer onOpenBooking={(studio) => handleOpenBooking(studio)} />
+        {/* 05 — SERVICES (matching services.png) */}
+        <ServicesExplorer onOpenBooking={(studio) => handleOpenBooking(studio)} />
 
-      {/* 06 — SIGNATURE LOOKS GALLERY (matching gallery.png) */}
-      <GallerySection />
+        {/* 06 — SIGNATURE LOOKS GALLERY (matching gallery.png) */}
+        <GallerySection />
 
-      {/* 09 — WHY SPARK (matching why spark.png) */}
-      <WhySpark />
+        {/* 09 — WHY SPARK (matching why spark.png) */}
+        <WhySpark />
 
-      {/* 10 — THE SALON / VIRTUAL TOUR (matching salon virtual tour.png) */}
-      <VirtualTour />
+        {/* 10 — THE SALON / VIRTUAL TOUR (matching salon virtual tour.png) */}
+        <VirtualTour />
 
-      {/* 11 — TESTIMONIALS (matching testimonials.png) */}
-      <Testimonials />
+        {/* 11 — TESTIMONIALS (matching testimonials.png) */}
+        <Testimonials />
 
-      {/* 12 — FINAL CTA (matching cta.png) */}
-      <FinalCta />
+        {/* 12 — FINAL CTA (matching cta.png) */}
+        <FinalCta />
+      </div>
 
       {/* 13 — FOOTER + SCROLL EXPERIENCE PREVIEW (matching footer.png + scroll experience picture dem.png) */}
       <Footer onOpenBooking={() => handleOpenBooking('hair')} />
@@ -118,7 +121,7 @@ export default function HomePage() {
               maxWidth: '920px',
               maxHeight: '92vh',
               overflowY: 'auto',
-              backgroundColor: '#07070a',
+              backgroundColor: '#000000',
               border: '1px solid var(--gold-primary)',
               boxShadow: '0 30px 90px rgba(0,0,0,0.95), var(--gold-glow)',
               padding: '36px 30px',

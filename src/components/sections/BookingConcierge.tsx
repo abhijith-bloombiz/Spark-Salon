@@ -153,7 +153,7 @@ export default function BookingConcierge({ initialStudio = 'hair', initialServic
       style={{
         position: 'relative',
         padding: '130px 0',
-        backgroundColor: '#060608',
+        backgroundColor: '#000000',
         overflow: 'hidden',
       }}
     >
@@ -230,7 +230,7 @@ export default function BookingConcierge({ initialStudio = 'hair', initialServic
                     width: '38px',
                     height: '38px',
                     borderRadius: '50%',
-                    backgroundColor: isCurrent ? '#c41230' : isPassed ? '#d4af37' : '#121218',
+                    backgroundColor: isCurrent ? '#c41230' : isPassed ? '#d4af37' : '#000000',
                     border: `1px solid ${isPassed ? '#d4af37' : 'rgba(255, 255, 255, 0.15)'}`,
                     color: isCurrent || isPassed ? '#fff' : 'var(--text-dim)',
                     display: 'flex',
@@ -277,7 +277,7 @@ export default function BookingConcierge({ initialStudio = 'hair', initialServic
           style={{
             maxWidth: '900px',
             margin: '0 auto',
-            backgroundColor: 'rgba(16, 16, 22, 0.85)',
+            backgroundColor: '#000000',
             backdropFilter: 'blur(30px)',
             border: '1px solid rgba(212, 175, 55, 0.3)',
             borderRadius: 'var(--squircle-xl, 26px)',
@@ -335,8 +335,8 @@ export default function BookingConcierge({ initialStudio = 'hair', initialServic
                       className="squircle"
                       style={{
                         padding: '18px 20px',
-                        backgroundColor: isSelected ? 'rgba(212, 175, 55, 0.1)' : 'rgba(255, 255, 255, 0.02)',
-                        border: isSelected ? '1px solid var(--gold-primary)' : '1px solid rgba(255, 255, 255, 0.08)',
+                        backgroundColor: isSelected ? 'rgba(212, 175, 55, 0.15)' : '#000000',
+                        border: isSelected ? '1px solid var(--gold-primary)' : '1px solid rgba(212, 175, 55, 0.2)',
                         borderRadius: 'var(--squircle-md, 16px)',
                         cursor: 'pointer',
                         transition: 'var(--transition-smooth)',
@@ -383,8 +383,8 @@ export default function BookingConcierge({ initialStudio = 'hair', initialServic
                       className="squircle"
                       style={{
                         padding: '24px 28px',
-                        backgroundColor: isSelected ? 'rgba(212, 175, 55, 0.1)' : 'rgba(255, 255, 255, 0.02)',
-                        border: isSelected ? '1px solid var(--gold-primary)' : '1px solid rgba(255, 255, 255, 0.08)',
+                        backgroundColor: isSelected ? 'rgba(212, 175, 55, 0.15)' : '#000000',
+                        border: isSelected ? '1px solid var(--gold-primary)' : '1px solid rgba(212, 175, 55, 0.2)',
                         borderRadius: 'var(--squircle-md, 16px)',
                         cursor: 'pointer',
                         display: 'flex',
@@ -748,7 +748,7 @@ export default function BookingConcierge({ initialStudio = 'hair', initialServic
                 style={{
                   maxWidth: '520px',
                   margin: '0 auto 36px',
-                  backgroundColor: 'rgba(6, 6, 8, 0.85)',
+                  backgroundColor: '#000000',
                   border: '1px solid var(--gold-border)',
                   borderRadius: 'var(--squircle-lg, 20px)',
                   padding: '24px 28px',

@@ -309,14 +309,14 @@ export default function GallerySection() {
             gap: '12px',
           }}
         >
-          <span style={{ width: '28px', height: '1px', backgroundColor: 'var(--gold-primary)' }} />
+          <span style={{ width: '28px', height: '1.5px', backgroundColor: '#9e781e' }} />
           <span
             style={{
               fontFamily: 'var(--font-sans-display)',
               fontSize: '0.74rem',
               fontWeight: 700,
               letterSpacing: '0.24em',
-              color: 'var(--gold-primary)',
+              color: '#9e781e',
               textTransform: 'uppercase',
             }}
           >
@@ -432,7 +432,7 @@ export default function GallerySection() {
                 fontFamily: 'var(--font-serif-display)',
                 fontSize: '2.4rem',
                 fontWeight: 700,
-                color: '#ffffff',
+                color: '#0d0c12',
                 lineHeight: 1.1,
                 letterSpacing: '0.04em',
                 textTransform: 'uppercase',
